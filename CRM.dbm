@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="16"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,705" last-zoom="1" max-obj-count="20"
 	 default-schema="public" default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
@@ -370,6 +370,89 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
+<schema name="contacts" layer="0" rect-visible="true" fill-color="#ad7fa8">
+	<role name="postgres"/>
+</schema>
+
+<table name="type_person" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="121" y="1011"/>
+	<column name="id_type" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_person">
+		<type name="char" length="50"/>
+	</column>
+	<constraint name="id_type" type="pk-constr" table="contacts.type_person">
+		<columns names="id_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="phone" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="437" y="1020"/>
+	<column name="nember_row_phone" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_person_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="id_person" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="phone">
+		<type name="numeric" length="12"/>
+	</column>
+	<constraint name="nember_row_phone" type="pk-constr" table="contacts.phone">
+		<columns names="nember_row_phone" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="email" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="127" y="1149"/>
+	<column name="number_row_email" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="id_person" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="char" length="100"/>
+	</column>
+	<constraint name="number_row_email" type="pk-constr" table="contacts.email">
+		<columns names="number_row_email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="messenger" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="412" y="1181"/>
+	<column name="number_row_messenger" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="id_person">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="name_messenger" not-null="true">
+		<type name="char" length="20"/>
+	</column>
+	<column name="messenger_address" not-null="true">
+		<type name="char" length="50"/>
+	</column>
+	<constraint name="number_row_messenger" type="pk-constr" table="contacts.messenger">
+		<columns names="number_row_messenger" ref-type="src-columns"/>
+	</constraint>
+</table>
+
 <constraint name="staff_status_id_status" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff_status" table="crm_core.staff">
 	<columns names="staff_status_id_status" ref-type="src-columns"/>
@@ -454,6 +537,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_employee" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="type_person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="contacts.type_person" table="contacts.phone">
+	<columns names="type_person_id" ref-type="src-columns"/>
+	<columns names="id_type" ref-type="dst-columns"/>
+</constraint>
+
 <relationship name="rel_staff_staff_status" type="relfk" layer="0"
 	 src-table="crm_core.staff"
 	 dst-table="crm_core.staff_status" reference-fk="staff_status_id_status"
@@ -522,6 +611,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_professional_development_staff1" type="relfk" layer="0"
 	 src-table="crm_core.professional_development"
 	 dst-table="crm_core.staff" reference-fk="staff_id_mentor"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_phone_type_person" type="relfk" layer="0"
+	 src-table="contacts.phone"
+	 dst-table="contacts.type_person" reference-fk="type_person_id"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
