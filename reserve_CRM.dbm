@@ -3,8 +3,8 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,282" last-zoom="1" max-obj-count="34"
-	 default-schema="public" default-owner="postgres">
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,705" last-zoom="1" max-obj-count="39"
+	 default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
 
@@ -18,13 +18,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="staff" layer="0" collapse-mode="2" max-obj-count="14">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="422" y="43"/>
+	<position x="421" y="40"/>
 	<column name="id_employee" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="first_name" not-null="true">
 		<type name="char" length="100"/>
@@ -64,13 +64,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="staff_status" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="39" y="38"/>
+	<position x="41" y="40"/>
 	<column name="id_status" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="status_description" not-null="true">
-		<type name="char" length="50"/>
+		<type name="varchar" length="15"/>
 	</column>
 	<constraint name="id_status" type="pk-constr" table="crm_core.staff_status">
 		<columns names="id_status" ref-type="src-columns"/>
@@ -80,13 +80,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="marital_status" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="35" y="150"/>
+	<position x="40" y="157"/>
 	<column name="id_statys" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="status_description" not-null="true">
-		<type name="char" length="15"/>
+		<type name="varchar" length="15"/>
 	</column>
 	<constraint name="id_statys" type="pk-constr" table="crm_core.marital_status">
 		<columns names="id_statys" ref-type="src-columns"/>
@@ -100,16 +100,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="books" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="42" y="1238"/>
+	<position x="43" y="1347"/>
 	<column name="id_books" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="name" not-null="true">
-		<type name="char" length="50"/>
+		<type name="varchar" length="100"/>
 	</column>
 	<column name="autor" not-null="true">
-		<type name="char" length="50"/>
+		<type name="varchar" length="100"/>
 	</column>
 	<column name="year">
 		<type name="date" length="0"/>
@@ -122,15 +122,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="reading_history" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="35" y="979"/>
+	<position x="39" y="1061"/>
 	<column name="namber_read_hist" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="staff_id_employee">
-		<type name="smallint" length="0"/>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
-	<column name="books_id_books">
+	<column name="books_id_books" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="start_reading">
@@ -144,19 +144,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="family" layer="0" collapse-mode="2" max-obj-count="7">
+<table name="family_member" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="31" y="262"/>
-	<column name="number_member" not-null="true"
+	<position x="36" y="271"/>
+	<column name="id" not-null="true"
 	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
-	</column>
-	<column name="family_relationship" not-null="true">
-		<type name="char" length="10"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="first_name" not-null="true">
 		<type name="char" length="100"/>
@@ -167,8 +164,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="maddle_name" not-null="true">
 		<type name="char" length="110"/>
 	</column>
-	<constraint name="number_member" type="pk-constr" table="crm_core.family">
-		<columns names="number_member" ref-type="src-columns"/>
+	<column name="birthday">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="id" type="pk-constr" table="crm_core.family_member">
+		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -179,19 +179,19 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="company" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="363" y="992"/>
+	<position x="344" y="1063"/>
 	<column name="id_company" not-null="true"
 	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="name_long" not-null="true">
-		<type name="char" length="50"/>
+		<type name="char" length="150"/>
 	</column>
 	<column name="name_short">
-		<type name="char" length="20"/>
+		<type name="char" length="30"/>
 	</column>
 	<constraint name="id_company" type="pk-constr" table="company.company">
 		<columns names="id_company" ref-type="src-columns"/>
@@ -201,13 +201,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="role_staff_unit" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="366" y="1281"/>
+	<position x="344" y="1343"/>
 	<column name="id_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="rele_description" not-null="true">
-		<type name="char" length="100"/>
+		<type name="varchar" length="100"/>
 	</column>
 	<constraint name="id_role" type="pk-constr" table="company.role_staff_unit">
 		<columns names="id_role" ref-type="src-columns"/>
@@ -217,16 +217,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_type" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="700" y="1012"/>
+	<position x="684" y="1063"/>
 	<column name="id_unit" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="name_unit" not-null="true">
-		<type name="char" length="50"/>
+		<type name="varchar" length="50"/>
 	</column>
 	<column name="company_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<constraint name="id_unit" type="pk-constr" table="company.units_type">
 		<columns names="id_unit" ref-type="src-columns"/>
@@ -237,10 +237,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="project" layer="0" collapse-mode="2" max-obj-count="8">
+<table name="project" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="367" y="633"/>
+	<position x="408" y="726"/>
 	<column name="id_project" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -248,11 +248,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="customer" not-null="true">
 		<type name="text" length="0"/>
 	</column>
-	<column name="customer_address">
-		<type name="char" length="200"/>
-	</column>
-	<column name="staff_id_PM">
-		<type name="smallint" length="0"/>
+	<column name="person_id_PM" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="start_project">
 		<type name="date" length="0"/>
@@ -260,8 +257,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="end_project">
 		<type name="date" length="0"/>
 	</column>
-	<column name="person_id_contact_person">
-		<type name="char" length="300"/>
+	<column name="person_id_contact_person" not-null="true">
+		<type name="integer" length="300"/>
 	</column>
 	<constraint name="id_project" type="pk-constr" table="project.project">
 		<columns names="id_project" ref-type="src-columns"/>
@@ -271,7 +268,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_role" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="66" y="831"/>
+	<position x="42" y="902"/>
 	<column name="id_project_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -287,13 +284,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_perticipants" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="35" y="548"/>
+	<position x="39" y="612"/>
 	<column name="namber_particip" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="staff_id_employee">
-		<type name="smallint" length="0"/>
+	<column name="person_id">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="project_id">
 		<type name="smallint" length="0"/>
@@ -320,13 +317,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_person" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="792" y="48"/>
+	<position x="801" y="40"/>
 	<column name="id_type" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="type_person">
-		<type name="char" length="50"/>
+	<column name="type_person" not-null="true">
+		<type name="varchar" length="50"/>
 	</column>
 	<constraint name="id_type" type="pk-constr" table="crm_core.type_person">
 		<columns names="id_type" ref-type="src-columns"/>
@@ -336,13 +333,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="phone" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1047" y="800"/>
+	<position x="1023" y="765"/>
 	<column name="nember_row_phone" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="phone">
 		<type name="numeric" length="12"/>
@@ -355,13 +352,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="email" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1386" y="782"/>
+	<position x="1363" y="766"/>
 	<column name="number_row_email" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="email" not-null="true">
 		<type name="char" length="100"/>
@@ -374,13 +371,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="messenger" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1046" y="957"/>
+	<position x="1040" y="950"/>
 	<column name="number_row_messenger" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="messenger_type_id" not-null="true">
 		<type name="smallint" length="20"/>
@@ -393,38 +390,35 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="person" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="person" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="781" y="207"/>
-	<column name="id_person" not-null="true"
+	<position x="831" y="447"/>
+	<column name="id" not-null="true"
 	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="type_person_id" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="full_name" not-null="true">
-		<type name="text" length="100"/>
-	</column>
 	<constraint name="id_person" type="pk-constr" table="crm_core.person">
-		<columns names="id_person" ref-type="src-columns"/>
+		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="address" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1063" y="1186"/>
+	<position x="1020" y="1149"/>
 	<column name="number_row_address" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="person_id" not-null="true">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
-	<column name="type_address" not-null="true">
-		<type name="char" length="15"/>
+	<column name="type_address_id" not-null="true">
+		<type name="smallint" length="15"/>
 	</column>
 	<column name="postal_code">
 		<type name="smallint" length="0"/>
@@ -469,18 +463,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		</idxelement>
 </index>
 
-<index name="person_indexes" table="crm_core.person"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="0">
-		<idxelement use-sorting="false">
-			<column name="full_name"/>
-		</idxelement>
-</index>
-
 <table name="messenger_type" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1402" y="987"/>
+	<position x="1420" y="1013"/>
 	<column name="id_messenger" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -496,7 +482,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="professional_development" layer="0" collapse-mode="2" max-obj-count="9">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1194" y="454"/>
+	<position x="1360" y="448"/>
 	<column name="namber_prof_develop" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -511,13 +497,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="date" length="0"/>
 	</column>
 	<column name="hours">
-		<type name="smallint" length="0"/>
+		<type name="numeric" length="3"/>
 	</column>
-	<column name="staff_id_employee">
-		<type name="smallint" length="0"/>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
-	<column name="staff_id_mentor">
-		<type name="smallint" length="0"/>
+	<column name="person_id_mentor">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="courses">
 		<type name="text" length="0"/>
@@ -530,7 +516,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="disciplines" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1371" y="51"/>
+	<position x="1409" y="42"/>
 	<column name="id_discipline" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -539,7 +525,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="name_discipline" not-null="true">
-		<type name="char" length="20"/>
+		<type name="varchar" length="30"/>
 	</column>
 	<constraint name="id_discipline" type="pk-constr" table="education.disciplines">
 		<columns names="id_discipline" ref-type="src-columns"/>
@@ -549,13 +535,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_discipline" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1092" y="46"/>
+	<position x="1127" y="40"/>
 	<column name="id_type" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="type_name" not-null="true">
-		<type name="char" length="30"/>
+		<type name="varchar" length="30"/>
 	</column>
 	<constraint name="id_type" type="pk-constr" table="education.type_discipline">
 		<columns names="id_type" ref-type="src-columns"/>
@@ -565,13 +551,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="mastered_discipline" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1200" y="243"/>
+	<position x="1228" y="235"/>
 	<column name="number_row_mastered" not-null="true"
 	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
-	<column name="staff_id_employee" not-null="true">
-		<type name="smallint" length="0"/>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="type_discipline_id" not-null="true">
 		<type name="smallint" length="0"/>
@@ -587,13 +573,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_history" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="690.867" y="1206.03"/>
+	<position x="684" y="1283"/>
 	<column name="number_row_history" not-null="true"
 	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
-	<column name="staff_id_employee" not-null="true">
-		<type name="smallint" length="0"/>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="unit_id" not-null="true">
 		<type name="smallint" length="0"/>
@@ -604,11 +590,69 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="date_errollment" not-null="true">
 		<type name="date" length="0"/>
 	</column>
-	<column name="staff_status_id" not-null="true">
-		<type name="smallint" length="10"/>
+	<column name="status" not-null="true">
+		<type name="boolean" length="0"/>
 	</column>
 	<constraint name="number_row_history" type="pk-constr" table="company.units_history">
 		<columns names="number_row_history" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="type_address" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="1416" y="1243"/>
+	<column name="id_address" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_address" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="id_address" type="pk-constr" table="contacts.type_address">
+		<columns names="id_address" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<genericsql name="crm-test">
+	<definition><![CDATA[create database]]></definition>
+</genericsql>
+
+<table name="family_relation" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="385" y="391"/>
+	<column name="number_row_relation" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="type_family_relationship_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="family_member_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="number_row_relation" type="pk-constr" table="crm_core.family_relation">
+		<columns names="number_row_relation" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="type_family_relationship" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="44" y="469"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_name" not-null="true">
+		<type name="varchar" length="10"/>
+	</column>
+	<constraint name="id_1" type="pk-constr" table="crm_core.type_family_relationship">
+		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -627,13 +671,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="crm_core.staff">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_id_employee" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="library.reading_history">
-	<columns names="staff_id_employee" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="library.reading_history">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="books_id_books" type="fk-constr" comparison-type="MATCH FULL"
@@ -643,15 +687,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="crm_core.family">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="crm_core.family_member">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="company.company">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="company_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -660,22 +704,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_company" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_id_PM" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="project.project">
-	<columns names="staff_id_PM" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
+<constraint name="person_id_PM" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.project">
+	<columns names="person_id_PM" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id_contact_person" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.project">
 	<columns names="person_id_contact_person" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_id_employee" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="project.project_perticipants">
-	<columns names="staff_id_employee" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.project_perticipants">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="project_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -690,40 +734,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_project_role" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_id_employee" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="education.professional_development">
-	<columns names="staff_id_employee" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
-</constraint>
-
-<constraint name="staff_id_mentor" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="education.professional_development">
-	<columns names="staff_id_mentor" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
-</constraint>
-
-<constraint name="discipline_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.disciplines" table="education.professional_development">
-	<columns names="discipline_id" ref-type="src-columns"/>
-	<columns names="id_discipline" ref-type="dst-columns"/>
-</constraint>
-
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="contacts.phone">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="contacts.email">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="contacts.messenger">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="messenger_type_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -741,7 +767,31 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="contacts.address">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="id_person" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="type_address_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="contacts.type_address" table="contacts.address">
+	<columns names="type_address_id" ref-type="src-columns"/>
+	<columns names="id_address" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="education.professional_development">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="person_id_mentor" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="education.professional_development">
+	<columns names="person_id_mentor" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="discipline_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.disciplines" table="education.professional_development">
+	<columns names="discipline_id" ref-type="src-columns"/>
+	<columns names="id_discipline" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="type_discipline_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -762,16 +812,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_discipline" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_id_employee" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="education.mastered_discipline">
-	<columns names="staff_id_employee" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="education.mastered_discipline">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_id_employee" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="company.units_history">
-	<columns names="staff_id_employee" ref-type="src-columns"/>
-	<columns names="id_employee" ref-type="dst-columns"/>
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="company.units_history">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="unit_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -786,184 +836,191 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_role" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="staff_status_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff_status" table="company.units_history">
-	<columns names="staff_status_id" ref-type="src-columns"/>
-	<columns names="id_status" ref-type="dst-columns"/>
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="crm_core.family_relation">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="person_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="type_family_relationship_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.type_family_relationship" table="crm_core.family_relation">
+	<columns names="type_family_relationship_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="family_member_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.family_member" table="crm_core.family_relation">
+	<columns names="family_member_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <relationship name="rel_staff_staff_status" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="crm_core.staff"
 	 dst-table="crm_core.staff_status" reference-fk="staff_status_id_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_staff_marital_status" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="crm_core.staff"
 	 dst-table="crm_core.marital_status" reference-fk="marital_status_id_status"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_reading_history_staff" type="relfk" layer="0"
-	 custom-color="#a40000"
+<relationship name="rel_staff_person" type="relfk" layer="0"
+	 src-table="crm_core.staff"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_reading_history_person" type="relfk" layer="0"
 	 src-table="library.reading_history"
-	 dst-table="crm_core.staff" reference-fk="staff_id_employee"
+	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reading_history_books" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="library.reading_history"
 	 dst-table="library.books" reference-fk="books_id_books"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_company_units_company" type="relfk" layer="0"
-	 custom-color="#000000"
+<relationship name="rel_company_person" type="relfk" layer="0"
+	 src-table="company.company"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_units_type_company" type="relfk" layer="0"
 	 src-table="company.units_type"
 	 dst-table="company.company" reference-fk="company_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_project_staff" type="relfk" layer="0"
-	 custom-color="#a40000"
+<relationship name="rel_project_person" type="relfk" layer="0"
 	 src-table="project.project"
-	 dst-table="crm_core.staff" reference-fk="staff_id_PM"
+	 dst-table="crm_core.person" reference-fk="person_id_PM"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="rel_project_person1" type="relfk" layer="0"
+	 src-table="project.project"
+	 dst-table="crm_core.person" reference-fk="person_id_contact_person"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_project_perticipants_staff" type="relfk" layer="0"
-	 custom-color="#a40000"
+<relationship name="rel_project_perticipants_person" type="relfk" layer="0"
 	 src-table="project.project_perticipants"
-	 dst-table="crm_core.staff" reference-fk="staff_id_employee"
+	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_project_perticipants_project" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="project.project_perticipants"
 	 dst-table="project.project" reference-fk="project_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_project_perticipants_project_role" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="project.project_perticipants"
 	 dst-table="project.project_role" reference-fk="project_role_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_professional_development_staff" type="relfk" layer="0"
-	 custom-color="#a40000"
-	 src-table="education.professional_development"
-	 dst-table="crm_core.staff" reference-fk="staff_id_employee"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_professional_development_staff1" type="relfk" layer="0"
-	 custom-color="#a40000"
-	 src-table="education.professional_development"
-	 dst-table="crm_core.staff" reference-fk="staff_id_mentor"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_person_type_person" type="relfk" layer="0"
-	 custom-color="#000000"
-	 src-table="crm_core.person"
-	 dst-table="crm_core.type_person" reference-fk="type_person_id"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_staff_person" type="relfk" layer="0"
-	 custom-color="#000000"
-	 src-table="crm_core.staff"
-	 dst-table="crm_core.person" reference-fk="person_id"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_phone_person" type="relfk" layer="0"
-	 custom-color="#a40000"
 	 src-table="contacts.phone"
 	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_email_person" type="relfk" layer="0"
-	 custom-color="#a40000"
 	 src-table="contacts.email"
 	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_messenger_person" type="relfk" layer="0"
-	 custom-color="#a40000"
 	 src-table="contacts.messenger"
-	 dst-table="crm_core.person" reference-fk="person_id"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_company_person" type="relfk" layer="0"
-	 custom-color="#a40000"
-	 src-table="company.company"
-	 dst-table="crm_core.person" reference-fk="person_id"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_project_person" type="relfk" layer="0"
-	 custom-color="#a40000"
-	 src-table="project.project"
-	 dst-table="crm_core.person" reference-fk="person_id_contact_person"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_address_person" type="relfk" layer="0"
-	 custom-color="#a40000"
-	 src-table="contacts.address"
 	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_messenger_messenger_type" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="contacts.messenger"
 	 dst-table="contacts.messenger_type" reference-fk="messenger_type_id"
 	 src-required="false" dst-required="false"/>
 
+<relationship name="rel_person_type_person" type="relfk" layer="0"
+	 src-table="crm_core.person"
+	 dst-table="crm_core.type_person" reference-fk="type_person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_person" type="relfk" layer="0"
+	 src-table="contacts.address"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_type_address" type="relfk" layer="0"
+	 src-table="contacts.address"
+	 dst-table="contacts.type_address" reference-fk="type_address_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_professional_development_person" type="relfk" layer="0"
+	 src-table="education.professional_development"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_professional_development_person1" type="relfk" layer="0"
+	 src-table="education.professional_development"
+	 dst-table="crm_core.person" reference-fk="person_id_mentor"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_professional_development_disciplines" type="relfk" layer="0"
+	 src-table="education.professional_development"
+	 dst-table="education.disciplines" reference-fk="discipline_id"
+	 src-required="false" dst-required="false"/>
+
 <relationship name="rel_disciplines_type_discipline" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="education.disciplines"
 	 dst-table="education.type_discipline" reference-fk="type_discipline_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_mastered_discipline_type_discipline" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="education.mastered_discipline"
 	 dst-table="education.type_discipline" reference-fk="type_discipline_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_mastered_discipline_disciplines" type="relfk" layer="0"
-	 custom-color="#000000"
 	 src-table="education.mastered_discipline"
 	 dst-table="education.disciplines" reference-fk="discipline_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_mastered_discipline_staff" type="relfk" layer="0"
-	 custom-color="#a40000"
+<relationship name="rel_mastered_discipline_person" type="relfk" layer="0"
 	 src-table="education.mastered_discipline"
-	 dst-table="crm_core.staff" reference-fk="staff_id_employee"
+	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_professional_development_disciplines" type="relfk" layer="0"
-	 custom-color="#000000"
-	 src-table="education.professional_development"
-	 dst-table="education.disciplines" reference-fk="discipline_id"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_unit_history_staff" type="relfk" layer="0"
-	 custom-color="#a40000"
+<relationship name="rel_units_history_person" type="relfk" layer="0"
 	 src-table="company.units_history"
-	 dst-table="crm_core.staff" reference-fk="staff_id_employee"
+	 dst-table="crm_core.person" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_unit_history_units_type" type="relfk" layer="0"
-	 custom-color="#000000"
+<relationship name="rel_units_history_units_type" type="relfk" layer="0"
 	 src-table="company.units_history"
 	 dst-table="company.units_type" reference-fk="unit_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_unit_history_role_staff_unit" type="relfk" layer="0"
-	 custom-color="#000000"
+<relationship name="rel_units_history_role_staff_unit" type="relfk" layer="0"
 	 src-table="company.units_history"
 	 dst-table="company.role_staff_unit" reference-fk="role_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_units_history_staff_status" type="relfk" layer="0"
-	 custom-color="#a40000"
-	 src-table="company.units_history"
-	 dst-table="crm_core.staff_status" reference-fk="staff_status_id"
+<relationship name="rel_family_relation_type_family_relationship" type="relfk" layer="0"
+	 src-table="crm_core.family_relation"
+	 dst-table="crm_core.type_family_relationship" reference-fk="type_family_relationship_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_family_relation_family_member" type="relfk" layer="0"
+	 src-table="crm_core.family_relation"
+	 dst-table="crm_core.family_member" reference-fk="family_member_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_family_member_person" type="relfk" layer="0"
+	 src-table="crm_core.family_member"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_family_relation_staff" type="relfk" layer="0"
+	 src-table="crm_core.family_relation"
+	 dst-table="crm_core.staff" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
