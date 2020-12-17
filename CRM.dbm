@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,564" last-zoom="1" max-obj-count="45"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,987" last-zoom="1" max-obj-count="51"
 	 default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
@@ -103,7 +103,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="books" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="485.455" y="2196.64"/>
+	<position x="848.455" y="2501.64"/>
 	<column name="id_books" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -131,7 +131,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="reading_history" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="616.455" y="1919.64"/>
+	<position x="979.455" y="2224.64"/>
 	<column name="namber_read_hist" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -188,7 +188,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="company" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1180.82" y="1311.45"/>
+	<position x="1448.82" y="1769.45"/>
 	<column name="id_company" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -210,7 +210,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="role_staff_unit" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1167.82" y="1629.45"/>
+	<position x="1435.82" y="2087.45"/>
 	<column name="id_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -229,7 +229,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_type" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1529.18" y="1360.27"/>
+	<position x="1797.18" y="1818.27"/>
 	<column name="id_unit" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -252,16 +252,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="project" layer="0" collapse-mode="2" max-obj-count="7">
+<table name="project" layer="0" collapse-mode="2" max-obj-count="8">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="456.364" y="1413.36"/>
+	<position x="771.364" y="1834.36"/>
 	<column name="id_project" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="customer" not-null="true">
-		<type name="text" length="0"/>
+	<column name="customer_id" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="person_id_PM" not-null="true">
 		<type name="integer" length="0"/>
@@ -275,6 +275,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="person_id_contact_person" not-null="true">
 		<type name="integer" length="300"/>
 	</column>
+	<column name="status_project_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
 	<constraint name="id_project" type="pk-constr" table="project.project">
 		<columns names="id_project" ref-type="src-columns"/>
 	</constraint>
@@ -283,7 +286,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_role" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="55.8182" y="1485.73"/>
+	<position x="45.8182" y="1629.73"/>
 	<column name="id_project_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -294,12 +297,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_project_role" type="pk-constr" table="project.project_role">
 		<columns names="id_project_role" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="role_description" type="uq-constr" table="project.project_role">
+		<columns names="role_description" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="project_perticipants" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="52.8182" y="1195.73"/>
+	<position x="45.8182" y="1286.73"/>
 	<column name="namber_particip" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -351,7 +357,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="phone" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="2396.09" y="857.909"/>
+	<position x="2407.09" y="921.909"/>
 	<column name="nember_row_phone" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -370,7 +376,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="email" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="2877.91" y="833.455"/>
+	<position x="2865.91" y="793.455"/>
 	<column name="number_row_email" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -389,7 +395,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="messenger" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="2267.64" y="1099.27"/>
+	<position x="2274.64" y="1121.27"/>
 	<column name="number_row_messenger" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -597,7 +603,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_history" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1786.73" y="1645.45"/>
+	<position x="2054.73" y="2103.45"/>
 	<column name="number_row_history" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -686,7 +692,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_books" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="771.182" y="2496.09"/>
+	<position x="1134.18" y="2801.09"/>
 	<column name="id_type_book" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -775,6 +781,72 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
+<table name="customer_contact" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="project"/>
+	<role name="postgres"/>
+	<position x="409" y="1294"/>
+	<column name="id_customer_contact" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="first_name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="last_name" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="middle_name">
+		<type name="varchar" length="110"/>
+	</column>
+	<column name="customer_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="id_customer_contact" type="pk-constr" table="project.customer_contact">
+		<columns names="id_customer_contact" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="customer" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="project"/>
+	<role name="postgres"/>
+	<position x="854" y="1339"/>
+	<column name="id_customer" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name_customer" not-null="true">
+		<type name="varchar" length="300"/>
+	</column>
+	<constraint name="id_customer" type="pk-constr" table="project.customer">
+		<columns names="id_customer" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="status_project" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="project"/>
+	<role name="postgres"/>
+	<position x="44" y="1942"/>
+	<column name="id_status_project" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="status_project_description" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="id_status_project" type="pk-constr" table="project.status_project">
+		<columns names="id_status_project" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="status_project_description" type="uq-constr" table="project.status_project">
+		<columns names="status_project_description" ref-type="src-columns"/>
+	</constraint>
+</table>
+
 <constraint name="staff_status_id_status" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff_status" table="crm_core.staff">
 	<columns names="staff_status_id_status" ref-type="src-columns"/>
@@ -842,9 +914,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <constraint name="person_id_contact_person" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.project">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="project.customer_contact" table="project.project">
 	<columns names="person_id_contact_person" ref-type="src-columns"/>
-	<columns names="id" ref-type="dst-columns"/>
+	<columns names="person_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="customer_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="project.customer" table="project.project">
+	<columns names="customer_id" ref-type="src-columns"/>
+	<columns names="id_customer" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="status_project_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="project.status_project" table="project.project">
+	<columns names="status_project_id" ref-type="src-columns"/>
+	<columns names="id_status_project" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1009,6 +1093,24 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_discipline" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.customer_contact">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="customer_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="project.customer" table="project.customer_contact">
+	<columns names="customer_id" ref-type="src-columns"/>
+	<columns names="id_customer" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.customer">
+	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
 <relationship name="rel_staff_staff_status" type="relfk" layer="0"
 	 src-table="crm_core.staff"
 	 dst-table="crm_core.staff_status" reference-fk="staff_status_id_status"
@@ -1052,11 +1154,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<position x="0" y="0"/>
 	</label>
 </relationship>
-
-<relationship name="rel_project_person1" type="relfk" layer="0"
-	 src-table="project.project"
-	 dst-table="crm_core.person" reference-fk="person_id_contact_person"
-	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_project_perticipants_person" type="relfk" layer="0"
 	 src-table="project.project_perticipants"
@@ -1209,6 +1306,36 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_professional_development_course_catalog" type="relfk" layer="0"
 	 src-table="education.professional_development"
 	 dst-table="education.course_catalog" reference-fk="course_catalog_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_customer_contact_person" type="relfk" layer="0"
+	 src-table="project.customer_contact"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_project_customer_contact" type="relfk" layer="0"
+	 src-table="project.project"
+	 dst-table="project.customer_contact" reference-fk="person_id_contact_person"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_customer_person" type="relfk" layer="0"
+	 src-table="project.customer"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_project_customer" type="relfk" layer="0"
+	 src-table="project.project"
+	 dst-table="project.customer" reference-fk="customer_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_customer_contact_customer" type="relfk" layer="0"
+	 src-table="project.customer_contact"
+	 dst-table="project.customer" reference-fk="customer_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_project_status_project" type="relfk" layer="0"
+	 src-table="project.project"
+	 dst-table="project.status_project" reference-fk="status_project_id"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
