@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="43"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,564" last-zoom="1" max-obj-count="45"
 	 default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
@@ -523,18 +523,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="person_id_mentor">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="courses">
-		<type name="text" length="0"/>
+	<column name="course_catalog_id" not-null="true">
+		<type name="smallint" length="0"/>
 	</column>
 	<constraint name="namber_prof_develop" type="pk-constr" table="education.professional_development">
 		<columns names="namber_prof_develop" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="disciplines" layer="0" collapse-mode="2" max-obj-count="3">
+<table name="discipline" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="2397.36" y="53"/>
+	<position x="2622.36" y="56"/>
 	<column name="id_discipline" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -545,10 +545,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="name_discipline" not-null="true">
 		<type name="varchar" length="30"/>
 	</column>
-	<constraint name="id_discipline" type="pk-constr" table="education.disciplines">
+	<constraint name="id_discipline" type="pk-constr" table="education.discipline">
 		<columns names="id_discipline" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="name_discipline" type="uq-constr" table="education.disciplines">
+	<constraint name="name_discipline" type="uq-constr" table="education.discipline">
 		<columns names="name_discipline" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -575,7 +575,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="mastered_discipline" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="2178.36" y="246"/>
+	<position x="2143.36" y="236"/>
 	<column name="number_row_mastered" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -686,12 +686,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_books" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="763.182" y="2524.09"/>
+	<position x="771.182" y="2496.09"/>
 	<column name="id_type_book" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="nama_type_book" not-null="true">
+	<column name="name_type_book" not-null="true">
 		<type name="varchar" length="20"/>
 	</column>
 	<constraint name="id_type_book" type="pk-constr" table="library.type_books">
@@ -750,6 +750,28 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="number_row_premium" type="pk-constr" table="crm_core.premium">
 		<columns names="number_row_premium" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="course_catalog" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="education"/>
+	<role name="postgres"/>
+	<position x="2808" y="361"/>
+	<column name="id_course" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="discipline_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="name_course" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="id_course" type="pk-constr" table="education.course_catalog">
+		<columns names="id_course" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="name_course" type="uq-constr" table="education.course_catalog">
+		<columns names="name_course" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -898,13 +920,19 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <constraint name="discipline_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.disciplines" table="education.professional_development">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.discipline" table="education.professional_development">
 	<columns names="discipline_id" ref-type="src-columns"/>
 	<columns names="id_discipline" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="course_catalog_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.course_catalog" table="education.professional_development">
+	<columns names="course_catalog_id" ref-type="src-columns"/>
+	<columns names="id_course" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="type_discipline_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.type_discipline" table="education.disciplines">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.type_discipline" table="education.discipline">
 	<columns names="type_discipline_id" ref-type="src-columns"/>
 	<columns names="id_type_descipline" ref-type="dst-columns"/>
 </constraint>
@@ -916,7 +944,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <constraint name="discipline_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.disciplines" table="education.mastered_discipline">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.discipline" table="education.mastered_discipline">
 	<columns names="discipline_id" ref-type="src-columns"/>
 	<columns names="id_discipline" ref-type="dst-columns"/>
 </constraint>
@@ -973,6 +1001,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.type_premium" table="crm_core.premium">
 	<columns names="type_premium_id" ref-type="src-columns"/>
 	<columns names="id_premium" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="discipline_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="education.discipline" table="education.course_catalog">
+	<columns names="discipline_id" ref-type="src-columns"/>
+	<columns names="id_discipline" ref-type="dst-columns"/>
 </constraint>
 
 <relationship name="rel_staff_staff_status" type="relfk" layer="0"
@@ -1086,11 +1120,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <relationship name="rel_professional_development_disciplines" type="relfk" layer="0"
 	 src-table="education.professional_development"
-	 dst-table="education.disciplines" reference-fk="discipline_id"
+	 dst-table="education.discipline" reference-fk="discipline_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_disciplines_type_discipline" type="relfk" layer="0"
-	 src-table="education.disciplines"
+	 src-table="education.discipline"
 	 dst-table="education.type_discipline" reference-fk="type_discipline_id"
 	 src-required="false" dst-required="false"/>
 
@@ -1101,7 +1135,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <relationship name="rel_mastered_discipline_disciplines" type="relfk" layer="0"
 	 src-table="education.mastered_discipline"
-	 dst-table="education.disciplines" reference-fk="discipline_id"
+	 dst-table="education.discipline" reference-fk="discipline_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_mastered_discipline_person" type="relfk" layer="0"
@@ -1165,6 +1199,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_premium_staff" type="relfk" layer="0"
 	 src-table="crm_core.premium"
 	 dst-table="crm_core.staff" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_course_catalog_discipline" type="relfk" layer="0"
+	 src-table="education.course_catalog"
+	 dst-table="education.discipline" reference-fk="discipline_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_professional_development_course_catalog" type="relfk" layer="0"
+	 src-table="education.professional_development"
+	 dst-table="education.course_catalog" reference-fk="course_catalog_id"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
