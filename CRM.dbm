@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="39"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="43"
 	 default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
@@ -15,10 +15,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="staff" layer="0" collapse-mode="2" max-obj-count="14">
+<table name="staff" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="421" y="40"/>
+	<position x="776" y="271.364"/>
 	<column name="id_employee" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -27,28 +27,25 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer" length="0"/>
 	</column>
 	<column name="first_name" not-null="true">
-		<type name="char" length="100"/>
+		<type name="varchar" length="100"/>
 	</column>
 	<column name="last_name" not-null="true">
-		<type name="char" length="255"/>
+		<type name="varchar" length="255"/>
 	</column>
 	<column name="middle_name" not-null="true">
-		<type name="char" length="110"/>
+		<type name="varchar" length="110"/>
 	</column>
 	<column name="birthday">
 		<type name="date" length="0"/>
 	</column>
-	<column name="education">
-		<type name="char" length="200"/>
+	<column name="type_education_id">
+		<type name="smallint" length="200"/>
 	</column>
 	<column name="date_employment">
 		<type name="date" length="0"/>
 	</column>
 	<column name="salary">
 		<type name="money" length="0"/>
-	</column>
-	<column name="premium">
-		<type name="char" length="200"/>
 	</column>
 	<column name="staff_status_id_status">
 		<type name="smallint" length="0"/>
@@ -64,7 +61,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="staff_status" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="36" y="33"/>
+	<position x="254.818" y="174.364"/>
 	<column name="id_status" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -83,7 +80,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="marital_status" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="45" y="163"/>
+	<position x="203.545" y="327.455"/>
 	<column name="id_statys" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -103,10 +100,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="books" layer="0" collapse-mode="2" max-obj-count="4">
+<table name="books" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="41" y="1368"/>
+	<position x="485.455" y="2196.64"/>
 	<column name="id_books" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -120,18 +117,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="year">
 		<type name="date" length="0"/>
 	</column>
+	<column name="type_books_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
 	<constraint name="id_books" type="pk-constr" table="library.books">
 		<columns names="id_books" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="book_name_autor" type="uq-constr" table="library.books">
-		<columns names="name,autor" ref-type="src-columns"/>
+	<constraint name="unique_book" type="uq-constr" table="library.books">
+		<columns names="name,autor,year,type_books_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="reading_history" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="37" y="1082"/>
+	<position x="616.455" y="1919.64"/>
 	<column name="namber_read_hist" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -156,22 +156,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="family_member" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="49" y="292"/>
+	<position x="127.364" y="478.727"/>
 	<column name="id_family_member" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="person_id" not-null="true">
+	<column name="person_id_family" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="first_name" not-null="true">
-		<type name="char" length="100"/>
+		<type name="varchar" length="100"/>
 	</column>
 	<column name="last_name" not-null="true">
-		<type name="char" length="255"/>
+		<type name="varchar" length="255"/>
 	</column>
 	<column name="maddle_name" not-null="true">
-		<type name="char" length="110"/>
+		<type name="varchar" length="110"/>
 	</column>
 	<column name="birthday">
 		<type name="date" length="0"/>
@@ -188,7 +188,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="company" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="352" y="1085"/>
+	<position x="1180.82" y="1311.45"/>
 	<column name="id_company" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -197,10 +197,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer" length="0"/>
 	</column>
 	<column name="name_long" not-null="true">
-		<type name="char" length="150"/>
+		<type name="varchar" length="150"/>
 	</column>
 	<column name="name_short">
-		<type name="char" length="30"/>
+		<type name="varchar" length="30"/>
 	</column>
 	<constraint name="id_company" type="pk-constr" table="company.company">
 		<columns names="id_company" ref-type="src-columns"/>
@@ -210,7 +210,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="role_staff_unit" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="352" y="1365"/>
+	<position x="1167.82" y="1629.45"/>
 	<column name="id_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -229,7 +229,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_type" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="692" y="1085"/>
+	<position x="1529.18" y="1360.27"/>
 	<column name="id_unit" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -255,7 +255,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="405" y="748"/>
+	<position x="456.364" y="1413.36"/>
 	<column name="id_project" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -283,13 +283,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_role" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="39" y="924"/>
+	<position x="55.8182" y="1485.73"/>
 	<column name="id_project_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="role_description">
-		<type name="char" length="50"/>
+		<type name="varchar" length="50"/>
 	</column>
 	<constraint name="id_project_role" type="pk-constr" table="project.project_role">
 		<columns names="id_project_role" ref-type="src-columns"/>
@@ -299,7 +299,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project_perticipants" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="36" y="634"/>
+	<position x="52.8182" y="1195.73"/>
 	<column name="namber_particip" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -332,7 +332,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_person" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="801" y="40"/>
+	<position x="1399" y="525.364"/>
 	<column name="id_type" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -351,7 +351,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="phone" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1023" y="765"/>
+	<position x="2396.09" y="857.909"/>
 	<column name="nember_row_phone" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -370,7 +370,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="email" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1363" y="766"/>
+	<position x="2877.91" y="833.455"/>
 	<column name="number_row_email" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -379,7 +379,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer" length="0"/>
 	</column>
 	<column name="email" not-null="true">
-		<type name="char" length="100"/>
+		<type name="varchar" length="100"/>
 	</column>
 	<constraint name="number_row_email" type="pk-constr" table="contacts.email">
 		<columns names="number_row_email" ref-type="src-columns"/>
@@ -389,7 +389,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="messenger" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1040" y="950"/>
+	<position x="2267.64" y="1099.27"/>
 	<column name="number_row_messenger" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -401,7 +401,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="smallint" length="20"/>
 	</column>
 	<column name="messenger_address" not-null="true">
-		<type name="char" length="50"/>
+		<type name="varchar" length="50"/>
 	</column>
 	<constraint name="number_row_messenger" type="pk-constr" table="contacts.messenger">
 		<columns names="number_row_messenger" ref-type="src-columns"/>
@@ -411,7 +411,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="person" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="831" y="447"/>
+	<position x="1374" y="936.364"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -427,7 +427,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="address" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1020" y="1149"/>
+	<position x="2174.91" y="1376.45"/>
 	<column name="number_row_address" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -454,7 +454,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="char" length="20"/>
 	</column>
 	<column name="street">
-		<type name="char" length="20"/>
+		<type name="varchar" length="50"/>
 	</column>
 	<column name="hous_number">
 		<type name="smallint" length="0"/>
@@ -484,13 +484,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="messenger_type" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1420" y="1013"/>
+	<position x="2725.82" y="1129.55"/>
 	<column name="id_messenger" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="name_messenger">
-		<type name="char" length="20"/>
+		<type name="varchar" length="20"/>
 	</column>
 	<constraint name="id_messenger" type="pk-constr" table="contacts.messenger_type">
 		<columns names="id_messenger" ref-type="src-columns"/>
@@ -500,7 +500,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="professional_development" layer="0" collapse-mode="2" max-obj-count="9">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1396" y="436"/>
+	<position x="2310.36" y="459"/>
 	<column name="namber_prof_develop" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -534,7 +534,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="disciplines" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1483" y="30"/>
+	<position x="2397.36" y="53"/>
 	<column name="id_discipline" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -556,7 +556,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_discipline" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1163" y="28"/>
+	<position x="2077.36" y="51"/>
 	<column name="id_type_descipline" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -575,7 +575,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="mastered_discipline" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="education"/>
 	<role name="postgres"/>
-	<position x="1264" y="223"/>
+	<position x="2178.36" y="246"/>
 	<column name="number_row_mastered" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -597,7 +597,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_history" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="692" y="1305"/>
+	<position x="1786.73" y="1645.45"/>
 	<column name="number_row_history" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -625,13 +625,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_address" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="1416" y="1243"/>
+	<position x="2710.91" y="1363.18"/>
 	<column name="id_address" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="type_address" not-null="true">
-		<type name="text" length="0"/>
+		<type name="varchar" length="20"/>
 	</column>
 	<constraint name="id_address" type="pk-constr" table="contacts.type_address">
 		<columns names="id_address" ref-type="src-columns"/>
@@ -645,7 +645,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="family_relation" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="431" y="398"/>
+	<position x="120.364" y="914.818"/>
 	<column name="number_row_relation" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -667,7 +667,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="type_family_relationship" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="43" y="483"/>
+	<position x="421" y="692.091"/>
 	<column name="id_type_relationship" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -680,6 +680,76 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 	<constraint name="type_name" type="uq-constr" table="crm_core.type_family_relationship">
 		<columns names="type_name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="type_books" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="library"/>
+	<role name="postgres"/>
+	<position x="763.182" y="2524.09"/>
+	<column name="id_type_book" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="nama_type_book" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="id_type_book" type="pk-constr" table="library.type_books">
+		<columns names="id_type_book" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="type_education" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="474" y="38"/>
+	<column name="id_education" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_education_description" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="id_education" type="pk-constr" table="crm_core.type_education">
+		<columns names="id_education" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="type_education_description" type="uq-constr" table="crm_core.type_education">
+		<columns names="type_education_description" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="type_premium" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="907" y="40"/>
+	<column name="id_premium" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_premium_description" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="id_premium" type="pk-constr" table="crm_core.type_premium">
+		<columns names="id_premium" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="premium" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="1364" y="157"/>
+	<column name="number_row_premium" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="person_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="type_premium_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="number_row_premium" type="pk-constr" table="crm_core.premium">
+		<columns names="number_row_premium" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -701,6 +771,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="type_education_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.type_education" table="crm_core.staff">
+	<columns names="type_education_id" ref-type="src-columns"/>
+	<columns names="id_education" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="type_books_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="library.type_books" table="library.books">
+	<columns names="type_books_id" ref-type="src-columns"/>
+	<columns names="id_type_book" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="library.reading_history">
 	<columns names="person_id" ref-type="src-columns"/>
@@ -713,9 +795,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_books" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+<constraint name="person_id_family" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="crm_core.family_member">
-	<columns names="person_id" ref-type="src-columns"/>
+	<columns names="person_id_family" ref-type="src-columns"/>
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
@@ -878,7 +960,19 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <constraint name="person_id_family_member" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.family_member" table="crm_core.family_relation">
 	<columns names="person_id_family_member" ref-type="src-columns"/>
+	<columns names="person_id_family" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="crm_core.premium">
+	<columns names="person_id" ref-type="src-columns"/>
 	<columns names="person_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="type_premium_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.type_premium" table="crm_core.premium">
+	<columns names="type_premium_id" ref-type="src-columns"/>
+	<columns names="id_premium" ref-type="dst-columns"/>
 </constraint>
 
 <relationship name="rel_staff_staff_status" type="relfk" layer="0"
@@ -1033,20 +1127,43 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_family_relation_type_family_relationship" type="relfk" layer="0"
 	 src-table="crm_core.family_relation"
 	 dst-table="crm_core.type_family_relationship" reference-fk="type_family_relationship_id"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_family_relation_family_member" type="relfk" layer="0"
 	 src-table="crm_core.family_relation"
 	 dst-table="crm_core.family_member" reference-fk="person_id_family_member"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_family_member_person" type="relfk" layer="0"
 	 src-table="crm_core.family_member"
-	 dst-table="crm_core.person" reference-fk="person_id"
+	 dst-table="crm_core.person" reference-fk="person_id_family"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_family_relation_staff" type="relfk" layer="0"
-	 src-table="crm_core.family_relation"
+<relationship name="rel_books_type_books" type="relfk" layer="0"
+	 src-table="library.books"
+	 dst-table="library.type_books" reference-fk="type_books_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_staff_type_education" type="relfk" layer="0"
+	 src-table="crm_core.staff"
+	 dst-table="crm_core.type_education" reference-fk="type_education_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_premium_type_premium" type="relfk" layer="0"
+	 src-table="crm_core.premium"
+	 dst-table="crm_core.type_premium" reference-fk="type_premium_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_premium_staff" type="relfk" layer="0"
+	 src-table="crm_core.premium"
 	 dst-table="crm_core.staff" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
