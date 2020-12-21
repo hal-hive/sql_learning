@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,22" last-zoom="1" max-obj-count="21"
+	 default-schema="public" default-owner="postgres">
+<database name="crm" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layer="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="play_evolutions" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="54" y="49"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hash" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="applied_at" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="apply_script">
+		<type name="text" length="0"/>
+	</column>
+	<column name="revert_script">
+		<type name="text" length="0"/>
+	</column>
+	<column name="state">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="last_problem">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="play_evolutions_pkey" type="pk-constr" table="public.play_evolutions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="address_contact_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="address_contact" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="426.767" y="49"/>
+	<column name="id" not-null="true" sequence="public.address_contact_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="street">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="state">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="country">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="city">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="zipCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="address_contact_pkey" type="pk-constr" table="public.address_contact">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="contacts_book_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="contacts_book" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="766.676" y="49"/>
+	<column name="id" not-null="true" sequence="public.contacts_book_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="owner_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="create_date" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="contacts_book_pkey" type="pk-constr" table="public.contacts_book">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="contacts_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="contacts" layer="0" collapse-mode="2" max-obj-count="16">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1094.68" y="49"/>
+	<column name="id" not-null="true" sequence="public.contacts_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="contacts_book_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="create_date" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="skype_id">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="fax">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="company">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="job_position">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="address_id">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="time_zone">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="language">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="contact_type">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="note">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="advertiser">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="contacts_pkey" type="pk-constr" table="public.contacts">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="phone_contact_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="phone_contact" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1456.31" y="49"/>
+	<column name="id" not-null="true" sequence="public.phone_contact_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="type" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="phone" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="contact_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="phone_contact_pkey" type="pk-constr" table="public.phone_contact">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="email_contact_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="email_contact" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="54" y="394.25"/>
+	<column name="id" not-null="true" sequence="public.email_contact_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="type" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="contact_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="email_contact_pkey" type="pk-constr" table="public.email_contact">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="groups_contact_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="groups_contact" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="379.612" y="394.25"/>
+	<column name="id" not-null="true" sequence="public.groups_contact_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="contacts_book_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="create_date" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="groups_contact_pkey" type="pk-constr" table="public.groups_contact">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="group_to_contacts" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="741.245" y="394.25"/>
+	<column name="group_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="contact_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="pk" type="pk-constr" table="public.group_to_contacts">
+		<columns names="group_id,contact_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="profiles_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="profiles" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1017.3" y="394.25"/>
+	<column name="user_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="nickname" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="first_name">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="last_name">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="avatar_url">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.profiles_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="profiles_pkey" type="pk-constr" table="public.profiles">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="login_info_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="login_info" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1336.1" y="394.25"/>
+	<column name="providerID" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="providerKey" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.login_info_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="login_info_pkey" type="pk-constr" table="public.login_info">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="password_info" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="54" y="623.3"/>
+	<column name="hasher" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="salt">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="login_info_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+</table>
+
+<sequence name="recover_password_info_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="recover_password_info" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="386.977" y="623.3"/>
+	<column name="email" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="host" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="expired_date" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="recover_id" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.recover_password_info_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="recover_password_info_pkey" type="pk-constr" table="public.recover_password_info">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="users_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="users" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="765.87" y="623.3"/>
+	<column name="login_info_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="company_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="role_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="state" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.users_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="users_pkey" type="pk-constr" table="public.users">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="companies_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="companies" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1062.28" y="690.3"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.companies_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="companies_pkey" type="pk-constr" table="public.companies">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="permissions_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="permissions" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1354.08" y="623.3"/>
+	<column name="action" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="permission_state" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="role_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.permissions_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="permissions_pkey" type="pk-constr" table="public.permissions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="roles_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="roles" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="54" y="852.35"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.roles_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="roles_pkey" type="pk-constr" table="public.roles">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="invite_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="invite" layer="0" collapse-mode="2" max-obj-count="9">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="348.383" y="848.35"/>
+	<column name="id" not-null="true" sequence="public.invite_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="roleId" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="companyId" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="expiredDate" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hash" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="invitedBy" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="invite_pkey" type="pk-constr" table="public.invite">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="jwt_authenticators_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="jwt_authenticators" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="678.735" y="852.35"/>
+	<column name="authenticator" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="identifier" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="id" not-null="true" sequence="public.jwt_authenticators_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="jwt_authenticators_pkey" type="pk-constr" table="public.jwt_authenticators">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="login_info" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.login_info" table="public.users">
+	<columns names="login_info_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_users_login_info" type="relfk" layer="0"
+	 custom-color="#25f3b7"
+	 src-table="public.users"
+	 dst-table="public.login_info" reference-fk="login_info"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="553,1243" last-zoom="1" max-obj-count="56"
+<dbmodel pgmodeler-ver="0.9.2" last-position="749,423" last-zoom="1" max-obj-count="54"
 	 default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
@@ -15,14 +15,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="staff" layer="0" collapse-mode="2" max-obj-count="13">
+<table name="staff" layer="0" collapse-mode="2" max-obj-count="12">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="776" y="271.364"/>
-	<column name="id_employee" not-null="true"
-	 identity-type="ALWAYS">
-		<type name="integer" length="0"/>
-	</column>
+	<position x="777" y="271.364"/>
 	<column name="person_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -53,8 +49,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="marital_status_id_status">
 		<type name="smallint" length="0"/>
 	</column>
-	<constraint name="id_employee" type="pk-constr" table="crm_core.staff">
-		<columns names="id_employee" ref-type="src-columns"/>
+	<constraint name="person_id_pk" type="pk-constr" table="crm_core.staff">
+		<columns names="person_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -317,22 +313,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 </schema>
 
-<table name="type_person" layer="0" collapse-mode="2" max-obj-count="2">
-	<schema name="crm_core"/>
-	<role name="postgres"/>
-	<position x="1399" y="525.364"/>
-	<column name="id_type" not-null="true"
-	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
-	</column>
-	<column name="type_person_description" not-null="true">
-		<type name="varchar" length="50"/>
-	</column>
-	<constraint name="id_type" type="pk-constr" table="crm_core.type_person">
-		<columns names="id_type" ref-type="src-columns"/>
-	</constraint>
-</table>
-
 <table name="phone" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="contacts"/>
 	<role name="postgres"/>
@@ -399,9 +379,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="person" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
-	<position x="1389" y="939.364"/>
+	<position x="1408" y="955.364"/>
 	<column name="id" not-null="true"
-	 identity-type="ALWAYS">
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="9223372036854775807" cache="1">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="type_person_id" not-null="true">
@@ -620,10 +600,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<genericsql name="crm-test">
-	<definition><![CDATA[create database]]></definition>
-</genericsql>
-
 <table name="family_relation" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="crm_core"/>
 	<role name="postgres"/>
@@ -732,10 +708,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="customer_contact" layer="0" collapse-mode="2" max-obj-count="7">
+<table name="customer_contact" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="project"/>
 	<role name="postgres"/>
-	<position x="427" y="1286"/>
+	<position x="426" y="1285"/>
 	<column name="id_customer_contact" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -751,9 +727,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="middle_name">
 		<type name="varchar" length="110"/>
-	</column>
-	<column name="customer_id" not-null="true">
-		<type name="integer" length="0"/>
 	</column>
 	<constraint name="id_customer_contact" type="pk-constr" table="project.customer_contact">
 		<columns names="id_customer_contact" ref-type="src-columns"/>
@@ -827,6 +800,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
+<table name="type_person" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="1398" y="526.364"/>
+	<column name="id_type" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="type_person_description" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="id_type" type="pk-constr" table="crm_core.type_person">
+		<columns names="id_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
 <table name="district" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="contacts"/>
 	<role name="postgres"/>
@@ -888,14 +877,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 index-type="btree" factor="0">
 		<idxelement use-sorting="false">
 			<column name="type_name"/>
-		</idxelement>
-</index>
-
-<index name="type_person_index" table="crm_core.type_person"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="btree" factor="0">
-		<idxelement use-sorting="false">
-			<column name="type_person_description"/>
 		</idxelement>
 </index>
 
@@ -1003,6 +984,41 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		</idxelement>
 </index>
 
+<table name="people" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+	<position x="1164" y="716"/>
+	<column name="id_people" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="first_name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="last_name" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="middle_name">
+		<type name="varchar" length="110"/>
+	</column>
+	<constraint name="id_people" type="pk-constr" table="crm_core.people">
+		<columns names="id_people" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="type_person_index" table="crm_core.type_person"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="type_person_description"/>
+		</idxelement>
+</index>
+
+<sequence name="type_person_id_seq" cycle="false" start="1" increment="1" min-value="0" max-value="32767" cache="1">
+	<schema name="crm_core"/>
+	<role name="postgres"/>
+</sequence>
+
 <constraint name="staff_status_id_status" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff_status" table="crm_core.staff">
 	<columns names="staff_status_id_status" ref-type="src-columns"/>
@@ -1066,7 +1082,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <constraint name="person_id_contact_person" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="project.customer_contact" table="project.project">
 	<columns names="person_id_contact_person" ref-type="src-columns"/>
-	<columns names="person_id" ref-type="dst-columns"/>
+	<columns names="id_customer_contact" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="customer_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1232,9 +1248,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff" table="crm_core.family_relation">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="crm_core.family_relation">
 	<columns names="person_id" ref-type="src-columns"/>
-	<columns names="person_id" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="type_family_relationship_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1244,9 +1260,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <constraint name="person_id_family_member" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.family_member" table="crm_core.family_relation">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="crm_core.family_relation">
 	<columns names="person_id_family_member" ref-type="src-columns"/>
-	<columns names="person_id_family" ref-type="dst-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1271,12 +1287,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.person" table="project.customer_contact">
 	<columns names="person_id" ref-type="src-columns"/>
 	<columns names="id" ref-type="dst-columns"/>
-</constraint>
-
-<constraint name="customer_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="project.customer" table="project.customer_contact">
-	<columns names="customer_id" ref-type="src-columns"/>
-	<columns names="id_customer" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1438,15 +1448,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</label>
 </relationship>
 
-<relationship name="rel_family_relation_family_member" type="relfk" layer="0"
-	 src-table="crm_core.family_relation"
-	 dst-table="crm_core.family_member" reference-fk="person_id_family_member"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="0" y="0"/>
-	</label>
-</relationship>
-
 <relationship name="rel_family_member_person" type="relfk" layer="0"
 	 src-table="crm_core.family_member"
 	 dst-table="crm_core.person" reference-fk="person_id_family"
@@ -1492,11 +1493,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="project.customer" reference-fk="customer_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_customer_contact_customer" type="relfk" layer="0"
-	 src-table="project.customer_contact"
-	 dst-table="project.customer" reference-fk="customer_id"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_project_status_project" type="relfk" layer="0"
 	 src-table="project.project"
 	 dst-table="project.status_project" reference-fk="status_project_id"
@@ -1512,16 +1508,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="contacts.region" reference-fk="region_id"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_family_relation_staff" type="relfk" layer="0"
-	 src-table="crm_core.family_relation"
-	 dst-table="crm_core.staff" reference-fk="person_id"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_premium_staff" type="relfk" layer="0"
-	 src-table="crm_core.premium"
-	 dst-table="crm_core.staff" reference-fk="person_id"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_address_district" type="relfk" layer="0"
 	 src-table="contacts.address"
 	 dst-table="contacts.district" reference-fk="district_id"
@@ -1530,6 +1516,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_address_city" type="relfk" layer="0"
 	 src-table="contacts.address"
 	 dst-table="contacts.city" reference-fk="city_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_family_relation_person" type="relfk" layer="0"
+	 src-table="crm_core.family_relation"
+	 dst-table="crm_core.person" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_family_relation_person1" type="relfk" layer="0"
+	 src-table="crm_core.family_relation"
+	 dst-table="crm_core.person" reference-fk="person_id_family_member"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
