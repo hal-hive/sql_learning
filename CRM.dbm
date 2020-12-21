@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="127,1144" last-zoom="1" max-obj-count="54"
+<dbmodel pgmodeler-ver="0.9.2" last-position="553,1243" last-zoom="1" max-obj-count="56"
 	 default-owner="postgres">
 <database name="CRM" is-template="false" allow-conns="true">
 </database>
@@ -72,9 +72,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_status" type="pk-constr" table="crm_core.staff_status">
 		<columns names="id_status" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="staff_status_description" type="uq-constr" table="crm_core.staff_status">
-		<columns names="staff_status_description" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="marital_status" layer="0" collapse-mode="2" max-obj-count="2">
@@ -91,9 +88,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_statys" type="pk-constr" table="crm_core.marital_status">
 		<columns names="id_statys" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="merital_status_description" type="uq-constr" table="crm_core.marital_status">
-		<columns names="merital_status_description" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <schema name="library" layer="0" rect-visible="true" fill-color="#729fcf">
@@ -103,7 +97,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="books" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="810.955" y="2491.64"/>
+	<position x="704.955" y="2464.64"/>
 	<column name="id_books" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -117,21 +111,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="year">
 		<type name="date" length="0"/>
 	</column>
-	<column name="type_books_id" not-null="true">
-		<type name="smallint" length="0"/>
+	<column name="accessibility" not-null="true">
+		<type name="boolean" length="0"/>
 	</column>
 	<constraint name="id_books" type="pk-constr" table="library.books">
 		<columns names="id_books" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="unique_book" type="uq-constr" table="library.books">
-		<columns names="name,autor,year,type_books_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
 <table name="reading_history" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="library"/>
 	<role name="postgres"/>
-	<position x="941.955" y="2214.64"/>
+	<position x="835.955" y="2187.64"/>
 	<column name="namber_read_hist" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -188,7 +179,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="company" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1435.82" y="1823.45"/>
+	<position x="1406.82" y="1948.45"/>
 	<column name="id_company" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -210,7 +201,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="role_staff_unit" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1422.82" y="2141.45"/>
+	<position x="1393.82" y="2266.45"/>
 	<column name="id_role" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -221,15 +212,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_role" type="pk-constr" table="company.role_staff_unit">
 		<columns names="id_role" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="rele_description" type="uq-constr" table="company.role_staff_unit">
-		<columns names="rele_description" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="units_type" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="1798.18" y="1875.27"/>
+	<position x="1769.18" y="2000.27"/>
 	<column name="id_unit" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -242,9 +230,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="id_unit" type="pk-constr" table="company.units_type">
 		<columns names="id_unit" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="name_unit" type="uq-constr" table="company.units_type">
-		<columns names="name_unit" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -291,14 +276,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="role_description">
+	<column name="role_description" not-null="true">
 		<type name="varchar" length="50"/>
 	</column>
 	<constraint name="id_project_role" type="pk-constr" table="project.project_role">
 		<columns names="id_project_role" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="role_description" type="uq-constr" table="project.project_role">
-		<columns names="role_description" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -349,9 +331,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_type" type="pk-constr" table="crm_core.type_person">
 		<columns names="id_type" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="type_person_description" type="uq-constr" table="crm_core.type_person">
-		<columns names="type_person_description" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="phone" layer="0" collapse-mode="2" max-obj-count="4">
@@ -379,7 +358,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="email" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="2865.91" y="793.455"/>
+	<position x="2853.91" y="786.455"/>
 	<column name="number_row_email" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -436,7 +415,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="address" layer="0" collapse-mode="2" max-obj-count="13">
 	<schema name="contacts"/>
 	<role name="postgres"/>
-	<position x="2174.91" y="1376.45"/>
+	<position x="2257.91" y="1413.45"/>
 	<column name="number_row_address" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="smallint" length="0"/>
@@ -456,11 +435,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="region_id">
 		<type name="smallint" length="20"/>
 	</column>
-	<column name="district">
-		<type name="char" length="20"/>
+	<column name="district_id">
+		<type name="smallint" length="20"/>
 	</column>
-	<column name="city">
-		<type name="char" length="20"/>
+	<column name="city_id" not-null="true">
+		<type name="smallint" length="20"/>
 	</column>
 	<column name="street">
 		<type name="varchar" length="50"/>
@@ -503,9 +482,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="id_messenger" type="pk-constr" table="contacts.messenger_type">
 		<columns names="id_messenger" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="name_messenger" type="uq-constr" table="contacts.messenger_type">
-		<columns names="name_messenger" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -560,9 +536,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_discipline" type="pk-constr" table="education.discipline">
 		<columns names="id_discipline" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="name_discipline" type="uq-constr" table="education.discipline">
-		<columns names="name_discipline" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="type_discipline" layer="0" collapse-mode="2" max-obj-count="2">
@@ -578,9 +551,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="id_type_descipline" type="pk-constr" table="education.type_discipline">
 		<columns names="id_type_descipline" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="type_discipline_name" type="uq-constr" table="education.type_discipline">
-		<columns names="type_discipline_name" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -609,7 +579,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="units_history" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="company"/>
 	<role name="postgres"/>
-	<position x="2041.73" y="2157.45"/>
+	<position x="2012.73" y="2282.45"/>
 	<column name="number_row_history" not-null="true"
 	 identity-type="ALWAYS">
 		<type name="integer" length="0"/>
@@ -647,9 +617,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="id_address" type="pk-constr" table="contacts.type_address">
 		<columns names="id_address" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="name_type_address" type="uq-constr" table="contacts.type_address">
-		<columns names="name_type_address" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -693,25 +660,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_type_relationship" type="pk-constr" table="crm_core.type_family_relationship">
 		<columns names="id_type_relationship" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="type_name" type="uq-constr" table="crm_core.type_family_relationship">
-		<columns names="type_name" ref-type="src-columns"/>
-	</constraint>
-</table>
-
-<table name="type_books" layer="0" collapse-mode="2" max-obj-count="2">
-	<schema name="library"/>
-	<role name="postgres"/>
-	<position x="1096.68" y="2791.09"/>
-	<column name="id_type_book" not-null="true"
-	 identity-type="ALWAYS">
-		<type name="smallint" length="0"/>
-	</column>
-	<column name="name_type_book" not-null="true">
-		<type name="varchar" length="20"/>
-	</column>
-	<constraint name="id_type_book" type="pk-constr" table="library.type_books">
-		<columns names="id_type_book" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="type_education" layer="0" collapse-mode="2" max-obj-count="2">
@@ -727,9 +675,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="id_education" type="pk-constr" table="crm_core.type_education">
 		<columns names="id_education" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="type_education_description" type="uq-constr" table="crm_core.type_education">
-		<columns names="type_education_description" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -779,14 +724,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="discipline_id" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="name_course" not-null="true">
+	<column name="course_name" not-null="true">
 		<type name="text" length="0"/>
 	</column>
 	<constraint name="id_course" type="pk-constr" table="education.course_catalog">
 		<columns names="id_course" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="name_course" type="uq-constr" table="education.course_catalog">
-		<columns names="name_course" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -851,9 +793,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_status_project" type="pk-constr" table="project.status_project">
 		<columns names="id_status_project" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="status_project_description" type="uq-constr" table="project.status_project">
-		<columns names="status_project_description" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="country" layer="0" collapse-mode="2" max-obj-count="2">
@@ -869,9 +808,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="id_country" type="pk-constr" table="contacts.country">
 		<columns names="id_country" ref-type="src-columns"/>
-	</constraint>
-	<constraint name="country_name" type="uq-constr" table="contacts.country">
-		<columns names="country_name" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -889,10 +825,183 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="id_region" type="pk-constr" table="contacts.region">
 		<columns names="id_region" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="region_name" type="uq-constr" table="contacts.region">
-		<columns names="region_name" ref-type="src-columns"/>
+</table>
+
+<table name="district" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="2823" y="1711"/>
+	<column name="id_district" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="district_name" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<constraint name="id_district" type="pk-constr" table="contacts.district">
+		<columns names="id_district" ref-type="src-columns"/>
 	</constraint>
 </table>
+
+<table name="city" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="contacts"/>
+	<role name="postgres"/>
+	<position x="2771" y="1847"/>
+	<column name="id_city" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="city_name" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<constraint name="id_city" type="pk-constr" table="contacts.city">
+		<columns names="id_city" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="type_education_index" table="crm_core.type_education"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="type_education_description"/>
+		</idxelement>
+</index>
+
+<index name="staff_status_index" table="crm_core.staff_status"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="staff_status_description"/>
+		</idxelement>
+</index>
+
+<index name="merital_status_index" table="crm_core.marital_status"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="merital_status_description"/>
+		</idxelement>
+</index>
+
+<index name="type_family_relationship_index" table="crm_core.type_family_relationship"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="type_name"/>
+		</idxelement>
+</index>
+
+<index name="type_person_index" table="crm_core.type_person"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="type_person_description"/>
+		</idxelement>
+</index>
+
+<index name="project_role_index" table="project.project_role"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="role_description"/>
+		</idxelement>
+</index>
+
+<index name="status_project_index" table="project.status_project"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="status_project_description"/>
+		</idxelement>
+</index>
+
+<index name="role_staff_unit_index" table="company.role_staff_unit"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="rele_description"/>
+		</idxelement>
+</index>
+
+<index name="name_unit_index" table="company.units_type"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="name_unit"/>
+		</idxelement>
+</index>
+
+<index name="city_name_index" table="contacts.city"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="city_name"/>
+		</idxelement>
+</index>
+
+<index name="district_name_index" table="contacts.district"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="district_name"/>
+		</idxelement>
+</index>
+
+<index name="region_name_index" table="contacts.region"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="region_name"/>
+		</idxelement>
+</index>
+
+<index name="country_name_index" table="contacts.country"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="country_name"/>
+		</idxelement>
+</index>
+
+<index name="type_address_index" table="contacts.type_address"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="name_type_address"/>
+		</idxelement>
+</index>
+
+<index name="name_messenger_index" table="contacts.messenger_type"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="name_messenger"/>
+		</idxelement>
+</index>
+
+<index name="course_name_index" table="education.course_catalog"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="course_name"/>
+		</idxelement>
+</index>
+
+<index name="name_discipline_index" table="education.discipline"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="name_discipline"/>
+		</idxelement>
+</index>
+
+<index name="type_discipline_index" table="education.type_discipline"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="type_discipline_name"/>
+		</idxelement>
+</index>
 
 <constraint name="staff_status_id_status" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.staff_status" table="crm_core.staff">
@@ -916,12 +1025,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="crm_core.type_education" table="crm_core.staff">
 	<columns names="type_education_id" ref-type="src-columns"/>
 	<columns names="id_education" ref-type="dst-columns"/>
-</constraint>
-
-<constraint name="type_books_id" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="library.type_books" table="library.books">
-	<columns names="type_books_id" ref-type="src-columns"/>
-	<columns names="id_type_book" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1048,6 +1151,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="contacts.region" table="contacts.address">
 	<columns names="region_id" ref-type="src-columns"/>
 	<columns names="id_region" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="district_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="contacts.district" table="contacts.address">
+	<columns names="district_id" ref-type="src-columns"/>
+	<columns names="id_district" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="city_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="contacts.city" table="contacts.address">
+	<columns names="city_id" ref-type="src-columns"/>
+	<columns names="id_city" ref-type="dst-columns"/>
 </constraint>
 
 <constraint name="person_id" type="fk-constr" comparison-type="MATCH FULL"
@@ -1337,11 +1452,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="crm_core.person" reference-fk="person_id_family"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_books_type_books" type="relfk" layer="0"
-	 src-table="library.books"
-	 dst-table="library.type_books" reference-fk="type_books_id"
-	 src-required="false" dst-required="false"/>
-
 <relationship name="rel_staff_type_education" type="relfk" layer="0"
 	 src-table="crm_core.staff"
 	 dst-table="crm_core.type_education" reference-fk="type_education_id"
@@ -1350,11 +1460,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_premium_type_premium" type="relfk" layer="0"
 	 src-table="crm_core.premium"
 	 dst-table="crm_core.type_premium" reference-fk="type_premium_id"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_premium_staff" type="relfk" layer="0"
-	 src-table="crm_core.premium"
-	 dst-table="crm_core.staff" reference-fk="person_id"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_course_catalog_discipline" type="relfk" layer="0"
@@ -1405,6 +1510,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_address_region" type="relfk" layer="0"
 	 src-table="contacts.address"
 	 dst-table="contacts.region" reference-fk="region_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_family_relation_staff" type="relfk" layer="0"
+	 src-table="crm_core.family_relation"
+	 dst-table="crm_core.staff" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_premium_staff" type="relfk" layer="0"
+	 src-table="crm_core.premium"
+	 dst-table="crm_core.staff" reference-fk="person_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_district" type="relfk" layer="0"
+	 src-table="contacts.address"
+	 dst-table="contacts.district" reference-fk="district_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_city" type="relfk" layer="0"
+	 src-table="contacts.address"
+	 dst-table="contacts.city" reference-fk="city_id"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
