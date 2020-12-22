@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,22" last-zoom="1" max-obj-count="21"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="21"
 	 default-schema="public" default-owner="postgres">
 <database name="crm" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
 	<role name="postgres"/>
@@ -395,7 +395,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="companies" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1062.28" y="690.3"/>
+	<position x="1053.28" y="676.3"/>
 	<column name="name" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
