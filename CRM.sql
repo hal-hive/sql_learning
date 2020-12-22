@@ -1,6 +1,6 @@
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
 -- pgModeler  version: 0.9.2
--- PostgreSQL version: 12.0
+-- PostgreSQL version: 10.0
 -- Project Site: pgmodeler.io
 -- Model Author: ---
 
@@ -13,11 +13,11 @@
 -- -- ddl-end --
 -- 
 
--- object: crm_core | type: SCHEMA --
--- DROP SCHEMA IF EXISTS crm_core CASCADE;
-CREATE SCHEMA crm_core;
+-- object: crm | type: SCHEMA --
+-- DROP SCHEMA IF EXISTS crm CASCADE;
+CREATE SCHEMA crm;
 -- ddl-end --
--- ALTER SCHEMA crm_core OWNER TO postgres;
+-- ALTER SCHEMA crm OWNER TO postgres;
 -- ddl-end --
 
 -- object: library | type: SCHEMA --
@@ -55,17 +55,13 @@ CREATE SCHEMA contacts;
 -- ALTER SCHEMA contacts OWNER TO postgres;
 -- ddl-end --
 
-SET search_path TO pg_catalog,public,crm_core,library,company,project,education,contacts;
+SET search_path TO pg_catalog,public,crm,library,company,project,education,contacts;
 -- ddl-end --
 
--- object: crm_core.staff | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.staff CASCADE;
-CREATE TABLE crm_core.staff (
-	person_id integer NOT NULL,
-	first_name varchar(100) NOT NULL,
-	last_name varchar(255) NOT NULL,
-	middle_name varchar(110) NOT NULL,
-	birthday date,
+-- object: crm.staff | type: TABLE --
+-- DROP TABLE IF EXISTS crm.staff CASCADE;
+CREATE TABLE crm.staff (
+	person_id bigint NOT NULL,
 	type_education_id smallint,
 	date_employment date,
 	salary money,
@@ -75,39 +71,39 @@ CREATE TABLE crm_core.staff (
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.staff OWNER TO postgres;
+-- ALTER TABLE crm.staff OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.staff_status | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.staff_status CASCADE;
-CREATE TABLE crm_core.staff_status (
-	id_status smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+-- object: crm.staff_status | type: TABLE --
+-- DROP TABLE IF EXISTS crm.staff_status CASCADE;
+CREATE TABLE crm.staff_status (
+	id_status smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	staff_status_description varchar(15) NOT NULL,
 	CONSTRAINT id_status PRIMARY KEY (id_status)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.staff_status OWNER TO postgres;
+-- ALTER TABLE crm.staff_status OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.marital_status | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.marital_status CASCADE;
-CREATE TABLE crm_core.marital_status (
-	id_statys smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+-- object: crm.marital_status | type: TABLE --
+-- DROP TABLE IF EXISTS crm.marital_status CASCADE;
+CREATE TABLE crm.marital_status (
+	id_statys smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	merital_status_description varchar(15) NOT NULL,
 	CONSTRAINT id_statys PRIMARY KEY (id_statys)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.marital_status OWNER TO postgres;
+-- ALTER TABLE crm.marital_status OWNER TO postgres;
 -- ddl-end --
 
 -- object: library.books | type: TABLE --
 -- DROP TABLE IF EXISTS library.books CASCADE;
 CREATE TABLE library.books (
-	id_books smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	name varchar(100) NOT NULL,
-	autor varchar(100) NOT NULL,
+	id_books integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 2147483647 START WITH 1 CACHE 1 ),
+	name_book varchar(100) NOT NULL,
+	person_id_autor bigint NOT NULL,
 	year date,
 	accessibility boolean NOT NULL,
 	CONSTRAINT id_books PRIMARY KEY (id_books)
@@ -120,9 +116,9 @@ CREATE TABLE library.books (
 -- object: library.reading_history | type: TABLE --
 -- DROP TABLE IF EXISTS library.reading_history CASCADE;
 CREATE TABLE library.reading_history (
-	namber_read_hist smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
-	books_id_books smallint NOT NULL,
+	namber_read_hist bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
+	books_id integer NOT NULL,
 	start_reading date,
 	end_reading date,
 	CONSTRAINT namber_read_hist PRIMARY KEY (namber_read_hist)
@@ -132,30 +128,13 @@ CREATE TABLE library.reading_history (
 -- ALTER TABLE library.reading_history OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.family_member | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.family_member CASCADE;
-CREATE TABLE crm_core.family_member (
-	id_family_member integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id_family integer NOT NULL,
-	first_name varchar(100) NOT NULL,
-	last_name varchar(255) NOT NULL,
-	maddle_name varchar(110) NOT NULL,
-	birthday date,
-	CONSTRAINT id_family_member PRIMARY KEY (id_family_member)
-
-);
--- ddl-end --
--- ALTER TABLE crm_core.family_member OWNER TO postgres;
--- ddl-end --
-
 -- object: company.company | type: TABLE --
 -- DROP TABLE IF EXISTS company.company CASCADE;
 CREATE TABLE company.company (
-	id_company integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+	id_company bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
 	name_long varchar(150) NOT NULL,
 	name_short varchar(30),
-	CONSTRAINT id_company PRIMARY KEY (id_company)
+	CONSTRAINT id_company_pk PRIMARY KEY (id_company)
 
 );
 -- ddl-end --
@@ -165,7 +144,7 @@ CREATE TABLE company.company (
 -- object: company.role_staff_unit | type: TABLE --
 -- DROP TABLE IF EXISTS company.role_staff_unit CASCADE;
 CREATE TABLE company.role_staff_unit (
-	id_role smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_role smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	rele_description varchar(100) NOT NULL,
 	CONSTRAINT id_role PRIMARY KEY (id_role)
 
@@ -177,9 +156,9 @@ CREATE TABLE company.role_staff_unit (
 -- object: company.units_type | type: TABLE --
 -- DROP TABLE IF EXISTS company.units_type CASCADE;
 CREATE TABLE company.units_type (
-	id_unit smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_unit smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	name_unit varchar(50) NOT NULL,
-	company_id integer NOT NULL,
+	person_id_company bigint NOT NULL,
 	CONSTRAINT id_unit PRIMARY KEY (id_unit)
 
 );
@@ -190,12 +169,12 @@ CREATE TABLE company.units_type (
 -- object: project.project | type: TABLE --
 -- DROP TABLE IF EXISTS project.project CASCADE;
 CREATE TABLE project.project (
-	id_project smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	customer_id integer NOT NULL,
-	"person_id_PM" integer NOT NULL,
+	id_project bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id_customer bigint NOT NULL,
+	"person_id_PM" bigint NOT NULL,
 	start_project date,
 	end_project date,
-	person_id_contact_person integer NOT NULL,
+	person_id_contact_person bigint NOT NULL,
 	status_project_id smallint NOT NULL,
 	CONSTRAINT id_project PRIMARY KEY (id_project)
 
@@ -207,7 +186,7 @@ CREATE TABLE project.project (
 -- object: project.project_role | type: TABLE --
 -- DROP TABLE IF EXISTS project.project_role CASCADE;
 CREATE TABLE project.project_role (
-	id_project_role smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_project_role smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	role_description varchar(50) NOT NULL,
 	CONSTRAINT id_project_role PRIMARY KEY (id_project_role)
 
@@ -219,9 +198,9 @@ CREATE TABLE project.project_role (
 -- object: project.project_perticipants | type: TABLE --
 -- DROP TABLE IF EXISTS project.project_perticipants CASCADE;
 CREATE TABLE project.project_perticipants (
-	namber_particip smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer,
-	project_id smallint,
+	namber_particip bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint,
+	project_id bigint,
 	project_role_id smallint,
 	function text,
 	CONSTRAINT namber_particip PRIMARY KEY (namber_particip)
@@ -234,8 +213,9 @@ CREATE TABLE project.project_perticipants (
 -- object: contacts.phone | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.phone CASCADE;
 CREATE TABLE contacts.phone (
-	nember_row_phone smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+	nember_row_phone bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
+	type_contact_id smallint NOT NULL,
 	phone numeric(12) NOT NULL,
 	status boolean NOT NULL,
 	CONSTRAINT nember_row_phone PRIMARY KEY (nember_row_phone)
@@ -248,8 +228,9 @@ CREATE TABLE contacts.phone (
 -- object: contacts.email | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.email CASCADE;
 CREATE TABLE contacts.email (
-	number_row_email smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+	number_row_email bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
+	type_contact_id smallint NOT NULL,
 	email varchar(100) NOT NULL,
 	CONSTRAINT number_row_email PRIMARY KEY (number_row_email)
 
@@ -261,8 +242,8 @@ CREATE TABLE contacts.email (
 -- object: contacts.messenger | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.messenger CASCADE;
 CREATE TABLE contacts.messenger (
-	number_row_messenger smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+	number_row_messenger bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
 	messenger_type_id smallint NOT NULL,
 	messenger_address varchar(50) NOT NULL,
 	CONSTRAINT number_row_messenger PRIMARY KEY (number_row_messenger)
@@ -272,54 +253,42 @@ CREATE TABLE contacts.messenger (
 -- ALTER TABLE contacts.messenger OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.person | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.person CASCADE;
-CREATE TABLE crm_core.person (
-	id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+-- object: crm.person | type: TABLE --
+-- DROP TABLE IF EXISTS crm.person CASCADE;
+CREATE TABLE crm.person (
+	id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
 	type_person_id smallint NOT NULL,
+	id_people_company bigint,
 	CONSTRAINT id PRIMARY KEY (id)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.person OWNER TO postgres;
+-- ALTER TABLE crm.person OWNER TO postgres;
 -- ddl-end --
 
--- object: contacts.address | type: TABLE --
--- DROP TABLE IF EXISTS contacts.address CASCADE;
-CREATE TABLE contacts.address (
-	number_row_address smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
-	type_address_id smallint NOT NULL,
+-- object: contacts.address_catalog | type: TABLE --
+-- DROP TABLE IF EXISTS contacts.address_catalog CASCADE;
+CREATE TABLE contacts.address_catalog (
+	id_address bigint NOT NULL GENERATED ALWAYS AS IDENTITY ,
 	postal_code numeric(5),
 	country_id smallint NOT NULL,
 	region_id smallint,
 	district_id smallint,
-	city_id smallint NOT NULL,
+	city_id integer NOT NULL,
 	street varchar(50),
 	hous_number smallint,
 	apartment_number smallint,
-	CONSTRAINT number_row_address PRIMARY KEY (number_row_address)
+	CONSTRAINT id_address PRIMARY KEY (id_address)
 
 );
 -- ddl-end --
--- ALTER TABLE contacts.address OWNER TO postgres;
--- ddl-end --
-
--- object: name_indexes | type: INDEX --
--- DROP INDEX IF EXISTS crm_core.name_indexes CASCADE;
-CREATE INDEX name_indexes ON crm_core.staff
-	USING btree
-	(
-	  first_name,
-	  last_name,
-	  middle_name
-	);
+-- ALTER TABLE contacts.address_catalog OWNER TO postgres;
 -- ddl-end --
 
 -- object: contacts.messenger_type | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.messenger_type CASCADE;
 CREATE TABLE contacts.messenger_type (
-	id_messenger smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_messenger smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	name_messenger varchar(20) NOT NULL,
 	CONSTRAINT id_messenger PRIMARY KEY (id_messenger)
 
@@ -331,14 +300,14 @@ CREATE TABLE contacts.messenger_type (
 -- object: education.professional_development | type: TABLE --
 -- DROP TABLE IF EXISTS education.professional_development CASCADE;
 CREATE TABLE education.professional_development (
-	namber_prof_develop smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	namber_prof_develop bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
 	discipline_id smallint NOT NULL,
 	start_period date,
 	end_period date,
 	hours numeric(3),
-	person_id integer NOT NULL,
-	person_id_mentor integer,
-	course_catalog_id smallint NOT NULL,
+	person_id bigint NOT NULL,
+	person_id_mentor bigint,
+	course_catalog_id bigint NOT NULL,
 	CONSTRAINT namber_prof_develop PRIMARY KEY (namber_prof_develop)
 
 );
@@ -349,7 +318,7 @@ CREATE TABLE education.professional_development (
 -- object: education.discipline | type: TABLE --
 -- DROP TABLE IF EXISTS education.discipline CASCADE;
 CREATE TABLE education.discipline (
-	id_discipline smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_discipline smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	type_discipline_id smallint NOT NULL,
 	name_discipline varchar(30) NOT NULL,
 	CONSTRAINT id_discipline PRIMARY KEY (id_discipline)
@@ -362,7 +331,7 @@ CREATE TABLE education.discipline (
 -- object: education.type_discipline | type: TABLE --
 -- DROP TABLE IF EXISTS education.type_discipline CASCADE;
 CREATE TABLE education.type_discipline (
-	id_type_descipline smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_type_descipline smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	type_discipline_name varchar(30) NOT NULL,
 	CONSTRAINT id_type_descipline PRIMARY KEY (id_type_descipline)
 
@@ -374,11 +343,10 @@ CREATE TABLE education.type_discipline (
 -- object: education.mastered_discipline | type: TABLE --
 -- DROP TABLE IF EXISTS education.mastered_discipline CASCADE;
 CREATE TABLE education.mastered_discipline (
-	number_row_mastered integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
-	type_discipline_id smallint NOT NULL,
+	person_id bigint NOT NULL,
 	discipline_id smallint NOT NULL,
-	CONSTRAINT number_row_mastered PRIMARY KEY (number_row_mastered)
+	date date NOT NULL,
+	CONSTRAINT person_discipline PRIMARY KEY (person_id,discipline_id)
 
 );
 -- ddl-end --
@@ -388,8 +356,8 @@ CREATE TABLE education.mastered_discipline (
 -- object: company.units_history | type: TABLE --
 -- DROP TABLE IF EXISTS company.units_history CASCADE;
 CREATE TABLE company.units_history (
-	number_row_history integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+	number_row_history bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
 	unit_id smallint NOT NULL,
 	role_id smallint NOT NULL,
 	date_errollment date NOT NULL,
@@ -404,86 +372,82 @@ CREATE TABLE company.units_history (
 -- object: contacts.type_address | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.type_address CASCADE;
 CREATE TABLE contacts.type_address (
-	id_address smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_type_address smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
 	name_type_address varchar(20) NOT NULL,
-	CONSTRAINT id_address PRIMARY KEY (id_address)
+	CONSTRAINT id_type_address PRIMARY KEY (id_type_address)
 
 );
 -- ddl-end --
 -- ALTER TABLE contacts.type_address OWNER TO postgres;
 -- ddl-end --
 
--- object: "crm-test" | type: Generic SQL Object --
-create database
--- ddl-end --
-
--- object: crm_core.family_relation | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.family_relation CASCADE;
-CREATE TABLE crm_core.family_relation (
-	number_row_relation integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+-- object: crm.family_relation | type: TABLE --
+-- DROP TABLE IF EXISTS crm.family_relation CASCADE;
+CREATE TABLE crm.family_relation (
+	number_row_relation bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
 	type_family_relationship_id smallint NOT NULL,
-	person_id_family_member integer NOT NULL,
+	person_id_family_member bigint NOT NULL,
 	CONSTRAINT number_row_relation PRIMARY KEY (number_row_relation)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.family_relation OWNER TO postgres;
+-- ALTER TABLE crm.family_relation OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.type_family_relationship | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.type_family_relationship CASCADE;
-CREATE TABLE crm_core.type_family_relationship (
-	id_type_relationship smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+-- object: crm.type_family_relationship | type: TABLE --
+-- DROP TABLE IF EXISTS crm.type_family_relationship CASCADE;
+CREATE TABLE crm.type_family_relationship (
+	id_type_relationship smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	type_name varchar(10) NOT NULL,
 	CONSTRAINT id_type_relationship PRIMARY KEY (id_type_relationship)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.type_family_relationship OWNER TO postgres;
+-- ALTER TABLE crm.type_family_relationship OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.type_education | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.type_education CASCADE;
-CREATE TABLE crm_core.type_education (
-	id_education smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+-- object: crm.type_education | type: TABLE --
+-- DROP TABLE IF EXISTS crm.type_education CASCADE;
+CREATE TABLE crm.type_education (
+	id_education smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	type_education_description varchar(20) NOT NULL,
 	CONSTRAINT id_education PRIMARY KEY (id_education)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.type_education OWNER TO postgres;
+-- ALTER TABLE crm.type_education OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.type_premium | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.type_premium CASCADE;
-CREATE TABLE crm_core.type_premium (
-	id_premium smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+-- object: crm.type_premium | type: TABLE --
+-- DROP TABLE IF EXISTS crm.type_premium CASCADE;
+CREATE TABLE crm.type_premium (
+	id_premium smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	type_premium_description varchar(50) NOT NULL,
 	CONSTRAINT id_premium PRIMARY KEY (id_premium)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.type_premium OWNER TO postgres;
+-- ALTER TABLE crm.type_premium OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.premium | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.premium CASCADE;
-CREATE TABLE crm_core.premium (
-	number_row_premium smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
+-- object: crm.premium | type: TABLE --
+-- DROP TABLE IF EXISTS crm.premium CASCADE;
+CREATE TABLE crm.premium (
+	number_row_premium bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 9223372036854775807 START WITH 1 CACHE 1 ),
+	person_id bigint NOT NULL,
 	type_premium_id smallint NOT NULL,
 	CONSTRAINT number_row_premium PRIMARY KEY (number_row_premium)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.premium OWNER TO postgres;
+-- ALTER TABLE crm.premium OWNER TO postgres;
 -- ddl-end --
 
 -- object: education.course_catalog | type: TABLE --
 -- DROP TABLE IF EXISTS education.course_catalog CASCADE;
 CREATE TABLE education.course_catalog (
-	id_course smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_course bigint NOT NULL GENERATED ALWAYS AS IDENTITY ,
 	discipline_id smallint NOT NULL,
 	course_name text NOT NULL,
 	CONSTRAINT id_course PRIMARY KEY (id_course)
@@ -493,39 +457,10 @@ CREATE TABLE education.course_catalog (
 -- ALTER TABLE education.course_catalog OWNER TO postgres;
 -- ddl-end --
 
--- object: project.customer_contact | type: TABLE --
--- DROP TABLE IF EXISTS project.customer_contact CASCADE;
-CREATE TABLE project.customer_contact (
-	id_customer_contact integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
-	first_name varchar(100) NOT NULL,
-	last_name varchar(255) NOT NULL,
-	middle_name varchar(110),
-	customer_id integer NOT NULL,
-	CONSTRAINT id_customer_contact PRIMARY KEY (id_customer_contact)
-
-);
--- ddl-end --
--- ALTER TABLE project.customer_contact OWNER TO postgres;
--- ddl-end --
-
--- object: project.customer | type: TABLE --
--- DROP TABLE IF EXISTS project.customer CASCADE;
-CREATE TABLE project.customer (
-	id_customer integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
-	person_id integer NOT NULL,
-	name_customer varchar(300) NOT NULL,
-	CONSTRAINT id_customer PRIMARY KEY (id_customer)
-
-);
--- ddl-end --
--- ALTER TABLE project.customer OWNER TO postgres;
--- ddl-end --
-
 -- object: project.status_project | type: TABLE --
 -- DROP TABLE IF EXISTS project.status_project CASCADE;
 CREATE TABLE project.status_project (
-	id_status_project smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_status_project smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	status_project_description varchar(50) NOT NULL,
 	CONSTRAINT id_status_project PRIMARY KEY (id_status_project)
 
@@ -537,7 +472,7 @@ CREATE TABLE project.status_project (
 -- object: contacts.country | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.country CASCADE;
 CREATE TABLE contacts.country (
-	id_country smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_country smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	country_name varchar(30) NOT NULL,
 	CONSTRAINT id_country PRIMARY KEY (id_country)
 
@@ -549,7 +484,7 @@ CREATE TABLE contacts.country (
 -- object: contacts.region | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.region CASCADE;
 CREATE TABLE contacts.region (
-	id_region smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_region smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	region_name varchar(30) NOT NULL,
 	CONSTRAINT id_region PRIMARY KEY (id_region)
 
@@ -558,22 +493,22 @@ CREATE TABLE contacts.region (
 -- ALTER TABLE contacts.region OWNER TO postgres;
 -- ddl-end --
 
--- object: crm_core.type_person | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.type_person CASCADE;
-CREATE TABLE crm_core.type_person (
-	id_type smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+-- object: crm.type_person | type: TABLE --
+-- DROP TABLE IF EXISTS crm.type_person CASCADE;
+CREATE TABLE crm.type_person (
+	id_type smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	type_person_description varchar(50) NOT NULL,
 	CONSTRAINT id_type PRIMARY KEY (id_type)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.type_person OWNER TO postgres;
+-- ALTER TABLE crm.type_person OWNER TO postgres;
 -- ddl-end --
 
 -- object: contacts.district | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.district CASCADE;
 CREATE TABLE contacts.district (
-	id_district smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_district smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 32767 START WITH 1 CACHE 1 ),
 	district_name varchar(30) NOT NULL,
 	CONSTRAINT id_district PRIMARY KEY (id_district)
 
@@ -585,7 +520,7 @@ CREATE TABLE contacts.district (
 -- object: contacts.city | type: TABLE --
 -- DROP TABLE IF EXISTS contacts.city CASCADE;
 CREATE TABLE contacts.city (
-	id_city smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	id_city integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT BY 1 MINVALUE 0 MAXVALUE 2147483647 START WITH 1 CACHE 1 ),
 	city_name varchar(30) NOT NULL,
 	CONSTRAINT id_city PRIMARY KEY (id_city)
 
@@ -595,8 +530,8 @@ CREATE TABLE contacts.city (
 -- ddl-end --
 
 -- object: type_education_index | type: INDEX --
--- DROP INDEX IF EXISTS crm_core.type_education_index CASCADE;
-CREATE INDEX type_education_index ON crm_core.type_education
+-- DROP INDEX IF EXISTS crm.type_education_index CASCADE;
+CREATE INDEX type_education_index ON crm.type_education
 	USING btree
 	(
 	  type_education_description
@@ -604,8 +539,8 @@ CREATE INDEX type_education_index ON crm_core.type_education
 -- ddl-end --
 
 -- object: staff_status_index | type: INDEX --
--- DROP INDEX IF EXISTS crm_core.staff_status_index CASCADE;
-CREATE INDEX staff_status_index ON crm_core.staff_status
+-- DROP INDEX IF EXISTS crm.staff_status_index CASCADE;
+CREATE INDEX staff_status_index ON crm.staff_status
 	USING btree
 	(
 	  staff_status_description
@@ -613,8 +548,8 @@ CREATE INDEX staff_status_index ON crm_core.staff_status
 -- ddl-end --
 
 -- object: merital_status_index | type: INDEX --
--- DROP INDEX IF EXISTS crm_core.merital_status_index CASCADE;
-CREATE INDEX merital_status_index ON crm_core.marital_status
+-- DROP INDEX IF EXISTS crm.merital_status_index CASCADE;
+CREATE INDEX merital_status_index ON crm.marital_status
 	USING btree
 	(
 	  merital_status_description
@@ -622,8 +557,8 @@ CREATE INDEX merital_status_index ON crm_core.marital_status
 -- ddl-end --
 
 -- object: type_family_relationship_index | type: INDEX --
--- DROP INDEX IF EXISTS crm_core.type_family_relationship_index CASCADE;
-CREATE INDEX type_family_relationship_index ON crm_core.type_family_relationship
+-- DROP INDEX IF EXISTS crm.type_family_relationship_index CASCADE;
+CREATE INDEX type_family_relationship_index ON crm.type_family_relationship
 	USING btree
 	(
 	  type_name
@@ -747,110 +682,122 @@ CREATE INDEX type_discipline_index ON education.type_discipline
 	);
 -- ddl-end --
 
--- object: crm_core.people | type: TABLE --
--- DROP TABLE IF EXISTS crm_core.people CASCADE;
-CREATE TABLE crm_core.people (
+-- object: crm.people | type: TABLE --
+-- DROP TABLE IF EXISTS crm.people CASCADE;
+CREATE TABLE crm.people (
 	id_people bigint NOT NULL GENERATED ALWAYS AS IDENTITY ,
 	first_name varchar(100) NOT NULL,
 	last_name varchar(255) NOT NULL,
 	middle_name varchar(110),
-	CONSTRAINT id_people PRIMARY KEY (id_people)
+	birthday date,
+	CONSTRAINT id_people_pk PRIMARY KEY (id_people)
 
 );
 -- ddl-end --
--- ALTER TABLE crm_core.people OWNER TO postgres;
+-- ALTER TABLE crm.people OWNER TO postgres;
 -- ddl-end --
 
 -- object: type_person_index | type: INDEX --
--- DROP INDEX IF EXISTS crm_core.type_person_index CASCADE;
-CREATE INDEX type_person_index ON crm_core.type_person
+-- DROP INDEX IF EXISTS crm.type_person_index CASCADE;
+CREATE INDEX type_person_index ON crm.type_person
 	USING btree
 	(
 	  type_person_description
 	);
 -- ddl-end --
 
+-- object: contacts.address | type: TABLE --
+-- DROP TABLE IF EXISTS contacts.address CASCADE;
+CREATE TABLE contacts.address (
+	person_id bigint NOT NULL,
+	type_address_id smallint NOT NULL,
+	address_catalog_id bigint NOT NULL,
+	CONSTRAINT person_address_pk PRIMARY KEY (person_id,type_address_id)
+
+);
+-- ddl-end --
+-- ALTER TABLE contacts.address OWNER TO postgres;
+-- ddl-end --
+
+-- object: contacts.type_contact | type: TABLE --
+-- DROP TABLE IF EXISTS contacts.type_contact CASCADE;
+CREATE TABLE contacts.type_contact (
+	id_type_contact smallint NOT NULL GENERATED ALWAYS AS IDENTITY ,
+	type_contact_name varchar(20) NOT NULL,
+	CONSTRAINT id_type_contact PRIMARY KEY (id_type_contact)
+
+);
+-- ddl-end --
+-- ALTER TABLE contacts.type_contact OWNER TO postgres;
+-- ddl-end --
+
 -- object: staff_status_id_status | type: CONSTRAINT --
--- ALTER TABLE crm_core.staff DROP CONSTRAINT IF EXISTS staff_status_id_status CASCADE;
-ALTER TABLE crm_core.staff ADD CONSTRAINT staff_status_id_status FOREIGN KEY (staff_status_id_status)
-REFERENCES crm_core.staff_status (id_status) MATCH FULL
+-- ALTER TABLE crm.staff DROP CONSTRAINT IF EXISTS staff_status_id_status CASCADE;
+ALTER TABLE crm.staff ADD CONSTRAINT staff_status_id_status FOREIGN KEY (staff_status_id_status)
+REFERENCES crm.staff_status (id_status) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: marital_status_id_status | type: CONSTRAINT --
--- ALTER TABLE crm_core.staff DROP CONSTRAINT IF EXISTS marital_status_id_status CASCADE;
-ALTER TABLE crm_core.staff ADD CONSTRAINT marital_status_id_status FOREIGN KEY (marital_status_id_status)
-REFERENCES crm_core.marital_status (id_statys) MATCH FULL
+-- ALTER TABLE crm.staff DROP CONSTRAINT IF EXISTS marital_status_id_status CASCADE;
+ALTER TABLE crm.staff ADD CONSTRAINT marital_status_id_status FOREIGN KEY (marital_status_id_status)
+REFERENCES crm.marital_status (id_statys) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.staff DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE crm_core.staff ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+-- ALTER TABLE crm.staff DROP CONSTRAINT IF EXISTS person_id CASCADE;
+ALTER TABLE crm.staff ADD CONSTRAINT person_id FOREIGN KEY (person_id)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: type_education_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.staff DROP CONSTRAINT IF EXISTS type_education_id CASCADE;
-ALTER TABLE crm_core.staff ADD CONSTRAINT type_education_id FOREIGN KEY (type_education_id)
-REFERENCES crm_core.type_education (id_education) MATCH FULL
+-- ALTER TABLE crm.staff DROP CONSTRAINT IF EXISTS type_education_id CASCADE;
+ALTER TABLE crm.staff ADD CONSTRAINT type_education_id FOREIGN KEY (type_education_id)
+REFERENCES crm.type_education (id_education) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: person_id_autor | type: CONSTRAINT --
+-- ALTER TABLE library.books DROP CONSTRAINT IF EXISTS person_id_autor CASCADE;
+ALTER TABLE library.books ADD CONSTRAINT person_id_autor FOREIGN KEY (person_id_autor)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE library.reading_history DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE library.reading_history ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: books_id_books | type: CONSTRAINT --
--- ALTER TABLE library.reading_history DROP CONSTRAINT IF EXISTS books_id_books CASCADE;
-ALTER TABLE library.reading_history ADD CONSTRAINT books_id_books FOREIGN KEY (books_id_books)
+-- object: books_id | type: CONSTRAINT --
+-- ALTER TABLE library.reading_history DROP CONSTRAINT IF EXISTS books_id CASCADE;
+ALTER TABLE library.reading_history ADD CONSTRAINT books_id FOREIGN KEY (books_id)
 REFERENCES library.books (id_books) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: person_id_family | type: CONSTRAINT --
--- ALTER TABLE crm_core.family_member DROP CONSTRAINT IF EXISTS person_id_family CASCADE;
-ALTER TABLE crm_core.family_member ADD CONSTRAINT person_id_family FOREIGN KEY (person_id_family)
-REFERENCES crm_core.person (id) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: person_id | type: CONSTRAINT --
--- ALTER TABLE company.company DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE company.company ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: company_id | type: CONSTRAINT --
--- ALTER TABLE company.units_type DROP CONSTRAINT IF EXISTS company_id CASCADE;
-ALTER TABLE company.units_type ADD CONSTRAINT company_id FOREIGN KEY (company_id)
-REFERENCES company.company (id_company) MATCH FULL
+-- object: person_id_company | type: CONSTRAINT --
+-- ALTER TABLE company.units_type DROP CONSTRAINT IF EXISTS person_id_company CASCADE;
+ALTER TABLE company.units_type ADD CONSTRAINT person_id_company FOREIGN KEY (person_id_company)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: "person_id_PM" | type: CONSTRAINT --
 -- ALTER TABLE project.project DROP CONSTRAINT IF EXISTS "person_id_PM" CASCADE;
 ALTER TABLE project.project ADD CONSTRAINT "person_id_PM" FOREIGN KEY ("person_id_PM")
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id_contact_person | type: CONSTRAINT --
 -- ALTER TABLE project.project DROP CONSTRAINT IF EXISTS person_id_contact_person CASCADE;
 ALTER TABLE project.project ADD CONSTRAINT person_id_contact_person FOREIGN KEY (person_id_contact_person)
-REFERENCES project.customer_contact (person_id) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: customer_id | type: CONSTRAINT --
--- ALTER TABLE project.project DROP CONSTRAINT IF EXISTS customer_id CASCADE;
-ALTER TABLE project.project ADD CONSTRAINT customer_id FOREIGN KEY (customer_id)
-REFERENCES project.customer (id_customer) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -861,10 +808,17 @@ REFERENCES project.status_project (id_status_project) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
+-- object: person_id_customer | type: CONSTRAINT --
+-- ALTER TABLE project.project DROP CONSTRAINT IF EXISTS person_id_customer CASCADE;
+ALTER TABLE project.project ADD CONSTRAINT person_id_customer FOREIGN KEY (person_id_customer)
+REFERENCES crm.person (id) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE project.project_perticipants DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE project.project_perticipants ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -885,21 +839,35 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE contacts.phone DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE contacts.phone ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: type_contact_id | type: CONSTRAINT --
+-- ALTER TABLE contacts.phone DROP CONSTRAINT IF EXISTS type_contact_id CASCADE;
+ALTER TABLE contacts.phone ADD CONSTRAINT type_contact_id FOREIGN KEY (type_contact_id)
+REFERENCES contacts.type_contact (id_type_contact) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE contacts.email DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE contacts.email ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ddl-end --
+
+-- object: type_contact_id_email | type: CONSTRAINT --
+-- ALTER TABLE contacts.email DROP CONSTRAINT IF EXISTS type_contact_id_email CASCADE;
+ALTER TABLE contacts.email ADD CONSTRAINT type_contact_id_email FOREIGN KEY (type_contact_id)
+REFERENCES contacts.type_contact (id_type_contact) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE contacts.messenger DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE contacts.messenger ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -911,50 +879,36 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: type_person_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.person DROP CONSTRAINT IF EXISTS type_person_id CASCADE;
-ALTER TABLE crm_core.person ADD CONSTRAINT type_person_id FOREIGN KEY (type_person_id)
-REFERENCES crm_core.type_person (id_type) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: person_id | type: CONSTRAINT --
--- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE contacts.address ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
--- object: type_address_id | type: CONSTRAINT --
--- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS type_address_id CASCADE;
-ALTER TABLE contacts.address ADD CONSTRAINT type_address_id FOREIGN KEY (type_address_id)
-REFERENCES contacts.type_address (id_address) MATCH FULL
+-- ALTER TABLE crm.person DROP CONSTRAINT IF EXISTS type_person_id CASCADE;
+ALTER TABLE crm.person ADD CONSTRAINT type_person_id FOREIGN KEY (type_person_id)
+REFERENCES crm.type_person (id_type) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: country_id | type: CONSTRAINT --
--- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS country_id CASCADE;
-ALTER TABLE contacts.address ADD CONSTRAINT country_id FOREIGN KEY (country_id)
+-- ALTER TABLE contacts.address_catalog DROP CONSTRAINT IF EXISTS country_id CASCADE;
+ALTER TABLE contacts.address_catalog ADD CONSTRAINT country_id FOREIGN KEY (country_id)
 REFERENCES contacts.country (id_country) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: region_id | type: CONSTRAINT --
--- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS region_id CASCADE;
-ALTER TABLE contacts.address ADD CONSTRAINT region_id FOREIGN KEY (region_id)
+-- ALTER TABLE contacts.address_catalog DROP CONSTRAINT IF EXISTS region_id CASCADE;
+ALTER TABLE contacts.address_catalog ADD CONSTRAINT region_id FOREIGN KEY (region_id)
 REFERENCES contacts.region (id_region) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: district_id | type: CONSTRAINT --
--- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS district_id CASCADE;
-ALTER TABLE contacts.address ADD CONSTRAINT district_id FOREIGN KEY (district_id)
+-- ALTER TABLE contacts.address_catalog DROP CONSTRAINT IF EXISTS district_id CASCADE;
+ALTER TABLE contacts.address_catalog ADD CONSTRAINT district_id FOREIGN KEY (district_id)
 REFERENCES contacts.district (id_district) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: city_id | type: CONSTRAINT --
--- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS city_id CASCADE;
-ALTER TABLE contacts.address ADD CONSTRAINT city_id FOREIGN KEY (city_id)
+-- ALTER TABLE contacts.address_catalog DROP CONSTRAINT IF EXISTS city_id CASCADE;
+ALTER TABLE contacts.address_catalog ADD CONSTRAINT city_id FOREIGN KEY (city_id)
 REFERENCES contacts.city (id_city) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
@@ -962,14 +916,14 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE education.professional_development DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE education.professional_development ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id_mentor | type: CONSTRAINT --
 -- ALTER TABLE education.professional_development DROP CONSTRAINT IF EXISTS person_id_mentor CASCADE;
 ALTER TABLE education.professional_development ADD CONSTRAINT person_id_mentor FOREIGN KEY (person_id_mentor)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -994,13 +948,6 @@ REFERENCES education.type_discipline (id_type_descipline) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: type_discipline_id | type: CONSTRAINT --
--- ALTER TABLE education.mastered_discipline DROP CONSTRAINT IF EXISTS type_discipline_id CASCADE;
-ALTER TABLE education.mastered_discipline ADD CONSTRAINT type_discipline_id FOREIGN KEY (type_discipline_id)
-REFERENCES education.type_discipline (id_type_descipline) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION;
--- ddl-end --
-
 -- object: discipline_id | type: CONSTRAINT --
 -- ALTER TABLE education.mastered_discipline DROP CONSTRAINT IF EXISTS discipline_id CASCADE;
 ALTER TABLE education.mastered_discipline ADD CONSTRAINT discipline_id FOREIGN KEY (discipline_id)
@@ -1011,14 +958,14 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE education.mastered_discipline DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE education.mastered_discipline ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
 -- ALTER TABLE company.units_history DROP CONSTRAINT IF EXISTS person_id CASCADE;
 ALTER TABLE company.units_history ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -1037,37 +984,37 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.family_relation DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE crm_core.family_relation ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.staff (person_id) MATCH FULL
+-- ALTER TABLE crm.family_relation DROP CONSTRAINT IF EXISTS person_id CASCADE;
+ALTER TABLE crm.family_relation ADD CONSTRAINT person_id FOREIGN KEY (person_id)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: type_family_relationship_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.family_relation DROP CONSTRAINT IF EXISTS type_family_relationship_id CASCADE;
-ALTER TABLE crm_core.family_relation ADD CONSTRAINT type_family_relationship_id FOREIGN KEY (type_family_relationship_id)
-REFERENCES crm_core.type_family_relationship (id_type_relationship) MATCH FULL
+-- ALTER TABLE crm.family_relation DROP CONSTRAINT IF EXISTS type_family_relationship_id CASCADE;
+ALTER TABLE crm.family_relation ADD CONSTRAINT type_family_relationship_id FOREIGN KEY (type_family_relationship_id)
+REFERENCES crm.type_family_relationship (id_type_relationship) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id_family_member | type: CONSTRAINT --
--- ALTER TABLE crm_core.family_relation DROP CONSTRAINT IF EXISTS person_id_family_member CASCADE;
-ALTER TABLE crm_core.family_relation ADD CONSTRAINT person_id_family_member FOREIGN KEY (person_id_family_member)
-REFERENCES crm_core.family_member (person_id_family) MATCH FULL
+-- ALTER TABLE crm.family_relation DROP CONSTRAINT IF EXISTS person_id_family_member CASCADE;
+ALTER TABLE crm.family_relation ADD CONSTRAINT person_id_family_member FOREIGN KEY (person_id_family_member)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.premium DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE crm_core.premium ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.staff (person_id) MATCH FULL
+-- ALTER TABLE crm.premium DROP CONSTRAINT IF EXISTS person_id CASCADE;
+ALTER TABLE crm.premium ADD CONSTRAINT person_id FOREIGN KEY (person_id)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: type_premium_id | type: CONSTRAINT --
--- ALTER TABLE crm_core.premium DROP CONSTRAINT IF EXISTS type_premium_id CASCADE;
-ALTER TABLE crm_core.premium ADD CONSTRAINT type_premium_id FOREIGN KEY (type_premium_id)
-REFERENCES crm_core.type_premium (id_premium) MATCH FULL
+-- ALTER TABLE crm.premium DROP CONSTRAINT IF EXISTS type_premium_id CASCADE;
+ALTER TABLE crm.premium ADD CONSTRAINT type_premium_id FOREIGN KEY (type_premium_id)
+REFERENCES crm.type_premium (id_premium) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
@@ -1079,23 +1026,23 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
 -- object: person_id | type: CONSTRAINT --
--- ALTER TABLE project.customer_contact DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE project.customer_contact ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+-- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS person_id CASCADE;
+ALTER TABLE contacts.address ADD CONSTRAINT person_id FOREIGN KEY (person_id)
+REFERENCES crm.person (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: customer_id | type: CONSTRAINT --
--- ALTER TABLE project.customer_contact DROP CONSTRAINT IF EXISTS customer_id CASCADE;
-ALTER TABLE project.customer_contact ADD CONSTRAINT customer_id FOREIGN KEY (customer_id)
-REFERENCES project.customer (id_customer) MATCH FULL
+-- object: type_address_id | type: CONSTRAINT --
+-- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS type_address_id CASCADE;
+ALTER TABLE contacts.address ADD CONSTRAINT type_address_id FOREIGN KEY (type_address_id)
+REFERENCES contacts.type_address (id_type_address) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
--- object: person_id | type: CONSTRAINT --
--- ALTER TABLE project.customer DROP CONSTRAINT IF EXISTS person_id CASCADE;
-ALTER TABLE project.customer ADD CONSTRAINT person_id FOREIGN KEY (person_id)
-REFERENCES crm_core.person (id) MATCH FULL
+-- object: address_catalog_id | type: CONSTRAINT --
+-- ALTER TABLE contacts.address DROP CONSTRAINT IF EXISTS address_catalog_id CASCADE;
+ALTER TABLE contacts.address ADD CONSTRAINT address_catalog_id FOREIGN KEY (address_catalog_id)
+REFERENCES contacts.address_catalog (id_address) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --
 
