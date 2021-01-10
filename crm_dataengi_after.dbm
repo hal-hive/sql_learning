@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="1" max-obj-count="21"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,501" last-zoom="1" max-obj-count="30"
 	 default-schema="public" default-owner="postgres">
 <database name="crm" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
 	<role name="postgres"/>
@@ -16,7 +16,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="play_evolutions" layer="0" collapse-mode="2" max-obj-count="8">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="54" y="49"/>
+	<position x="27" y="250"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -32,8 +32,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="revert_script">
 		<type name="text" length="0"/>
 	</column>
-	<column name="state">
-		<type name="character varying" length="255"/>
+	<column name="state_id">
+		<type name="smallint" length="255"/>
 	</column>
 	<column name="last_problem">
 		<type name="text" length="0"/>
@@ -51,24 +51,24 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="address_contact" layer="0" collapse-mode="2" max-obj-count="7">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="426.767" y="49"/>
+	<position x="399.767" y="250"/>
 	<column name="id" not-null="true" sequence="public.address_contact_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
 	<column name="street">
 		<type name="character varying" length="0"/>
 	</column>
-	<column name="state">
-		<type name="character varying" length="0"/>
+	<column name="state_id">
+		<type name="smallint" length="0"/>
 	</column>
-	<column name="country">
-		<type name="character varying" length="0"/>
+	<column name="country_id">
+		<type name="smallint" length="0"/>
 	</column>
-	<column name="city">
-		<type name="character varying" length="0"/>
+	<column name="city_id">
+		<type name="integer" length="0"/>
 	</column>
 	<column name="zipCode">
-		<type name="character varying" length="0"/>
+		<type name="varchar" length="8"/>
 	</column>
 	<constraint name="address_contact_pkey" type="pk-constr" table="public.address_contact">
 		<columns names="id" ref-type="src-columns"/>
@@ -83,7 +83,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="contacts_book" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="766.676" y="49"/>
+	<position x="739.676" y="250"/>
 	<column name="id" not-null="true" sequence="public.contacts_book_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -106,7 +106,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="contacts" layer="0" collapse-mode="2" max-obj-count="16">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1094.68" y="49"/>
+	<position x="1067.68" y="250"/>
 	<column name="id" not-null="true" sequence="public.contacts_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -125,17 +125,17 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="fax">
 		<type name="character varying" length="0"/>
 	</column>
-	<column name="company">
-		<type name="character varying" length="0"/>
+	<column name="companies_id">
+		<type name="bigint" length="0"/>
 	</column>
-	<column name="job_position">
-		<type name="character varying" length="0"/>
+	<column name="job_position_id">
+		<type name="smallint" length="0"/>
 	</column>
 	<column name="address_id">
 		<type name="bigint" length="0"/>
 	</column>
-	<column name="time_zone">
-		<type name="character varying" length="0"/>
+	<column name="time_zone_id">
+		<type name="smallint" length="0"/>
 	</column>
 	<column name="language">
 		<type name="character varying" length="0"/>
@@ -162,7 +162,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="phone_contact" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1456.31" y="49"/>
+	<position x="1133.31" y="75"/>
 	<column name="id" not-null="true" sequence="public.phone_contact_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -188,7 +188,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="email_contact" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="54" y="394.25"/>
+	<position x="36" y="542.25"/>
 	<column name="id" not-null="true" sequence="public.email_contact_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -214,7 +214,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="groups_contact" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="379.612" y="394.25"/>
+	<position x="362.612" y="569.25"/>
 	<column name="id" not-null="true" sequence="public.groups_contact_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
@@ -235,7 +235,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="group_to_contacts" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="741.245" y="394.25"/>
+	<position x="772.245" y="410.25"/>
 	<column name="group_id" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
@@ -255,15 +255,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="profiles" layer="0" collapse-mode="2" max-obj-count="8">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1017.3" y="394.25"/>
+	<position x="930.3" y="966.25"/>
 	<column name="user_id" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
 	<column name="nickname" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
-	<column name="email" not-null="true">
-		<type name="character varying" length="0"/>
+	<column name="email_contact_id" not-null="true">
+		<type name="bigint" length="0"/>
 	</column>
 	<column name="first_name">
 		<type name="character varying" length="0"/>
@@ -290,7 +290,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="login_info" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1336.1" y="394.25"/>
+	<position x="1299.1" y="890.25"/>
 	<column name="providerID" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
@@ -308,7 +308,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="password_info" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="54" y="623.3"/>
+	<position x="1443" y="1184.3"/>
 	<column name="hasher" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
@@ -321,6 +321,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="login_info_id" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
+	<constraint name="login_info_id_pk" type="pk-constr" table="public.password_info">
+		<columns names="login_info_id" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <sequence name="recover_password_info_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
@@ -331,9 +334,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="recover_password_info" layer="0" collapse-mode="2" max-obj-count="8">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="386.977" y="623.3"/>
-	<column name="email" not-null="true">
-		<type name="character varying" length="0"/>
+	<position x="355.977" y="890.3"/>
+	<column name="email_contact_id" not-null="true">
+		<type name="bigint" length="0"/>
 	</column>
 	<column name="host" not-null="true">
 		<type name="character varying" length="0"/>
@@ -366,7 +369,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="users" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="765.87" y="623.3"/>
+	<position x="736.87" y="765.3"/>
 	<column name="login_info_id" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
@@ -376,8 +379,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="role_id" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
-	<column name="state" not-null="true">
-		<type name="integer" length="0"/>
+	<column name="state_id" not-null="true">
+		<type name="smallint" length="0"/>
 	</column>
 	<column name="id" not-null="true" sequence="public.users_id_seq">
 		<type name="bigint" length="0"/>
@@ -395,7 +398,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="companies" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1053.28" y="676.3"/>
+	<position x="1027.28" y="725.3"/>
 	<column name="name" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
@@ -415,7 +418,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="permissions" layer="0" collapse-mode="2" max-obj-count="4">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1354.08" y="623.3"/>
+	<position x="1032.08" y="1211.3"/>
 	<column name="action" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
@@ -441,7 +444,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="roles" layer="0" collapse-mode="2" max-obj-count="2">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="54" y="852.35"/>
+	<position x="714" y="1320.35"/>
 	<column name="name" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
@@ -461,12 +464,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="invite" layer="0" collapse-mode="2" max-obj-count="9">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="348.383" y="848.35"/>
+	<position x="9.383" y="814.35"/>
 	<column name="id" not-null="true" sequence="public.invite_id_seq">
 		<type name="bigint" length="0"/>
 	</column>
-	<column name="email" not-null="true">
-		<type name="character varying" length="0"/>
+	<column name="email_contact_id" not-null="true">
+		<type name="bigint" length="0"/>
 	</column>
 	<column name="roleId" not-null="true">
 		<type name="bigint" length="0"/>
@@ -499,7 +502,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="jwt_authenticators" layer="0" collapse-mode="2" max-obj-count="3">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="678.735" y="852.35"/>
+	<position x="600.735" y="1138.35"/>
 	<column name="authenticator" not-null="true">
 		<type name="character varying" length="0"/>
 	</column>
@@ -514,16 +517,280 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
+<table name="state" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="749" y="560"/>
+	<column name="id_state" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="state_name" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="id_state" type="pk-constr" table="public.state">
+		<columns names="id_state" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="job_position" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1510" y="526"/>
+	<column name="id_job_position" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="name_job_position" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_job_position" type="pk-constr" table="public.job_position">
+		<columns names="id_job_position" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="time_zone" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1420" y="735"/>
+	<column name="id_time_zone" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="value_time_zone" not-null="true">
+		<type name="varchar" length="10"/>
+	</column>
+	<constraint name="id_time_zone" type="pk-constr" table="public.time_zone">
+		<columns names="id_time_zone" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="language_list" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1516" y="78"/>
+	<column name="id_language" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="name_language" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_language" type="pk-constr" table="public.language_list">
+		<columns names="id_language" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="contact_languages_connection" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1486" y="275"/>
+	<column name="id_contacts" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="language_list_id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="contacts_to_language" type="pk-constr" table="public.contact_languages_connection">
+		<columns names="id_contacts,language_list_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="country" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="782" y="68"/>
+	<column name="id_country" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="country_name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_country" type="pk-constr" table="public.country">
+		<columns names="id_country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="city" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="506" y="64"/>
+	<column name="id_city" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="0" max-value="2147483647" cache="1">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="city_name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_city" type="pk-constr" table="public.city">
+		<columns names="id_city" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="state_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.state" table="public.play_evolutions">
+	<columns names="state_id" ref-type="src-columns"/>
+	<columns names="id_state" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="state_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.state" table="public.address_contact">
+	<columns names="state_id" ref-type="src-columns"/>
+	<columns names="id_state" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="country_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country" table="public.address_contact">
+	<columns names="country_id" ref-type="src-columns"/>
+	<columns names="id_country" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="city_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city" table="public.address_contact">
+	<columns names="city_id" ref-type="src-columns"/>
+	<columns names="id_city" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="companies_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.companies" table="public.contacts">
+	<columns names="companies_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="job_position_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.job_position" table="public.contacts">
+	<columns names="job_position_id" ref-type="src-columns"/>
+	<columns names="id_job_position" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="time_zone_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.time_zone" table="public.contacts">
+	<columns names="time_zone_id" ref-type="src-columns"/>
+	<columns names="id_time_zone" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="email_contact_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.email_contact" table="public.profiles">
+	<columns names="email_contact_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="login_info_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.login_info" table="public.password_info">
+	<columns names="login_info_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="email_contact_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.email_contact" table="public.recover_password_info">
+	<columns names="email_contact_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="login_info" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.login_info" table="public.users">
 	<columns names="login_info_id" ref-type="src-columns"/>
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="state_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.state" table="public.users">
+	<columns names="state_id" ref-type="src-columns"/>
+	<columns names="id_state" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="email_contact_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.email_contact" table="public.invite">
+	<columns names="email_contact_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_contacts_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.contacts" table="public.contact_languages_connection">
+	<columns names="id_contacts" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="language_list_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.language_list" table="public.contact_languages_connection">
+	<columns names="language_list_id" ref-type="src-columns"/>
+	<columns names="id_language" ref-type="dst-columns"/>
+</constraint>
+
 <relationship name="rel_users_login_info" type="relfk" layer="0"
-	 custom-color="#25f3b7"
 	 src-table="public.users"
 	 dst-table="public.login_info" reference-fk="login_info"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_password_info_login_info" type="relfk" layer="0"
+	 src-table="public.password_info"
+	 dst-table="public.login_info" reference-fk="login_info_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_play_evolutions_state" type="relfk" layer="0"
+	 src-table="public.play_evolutions"
+	 dst-table="public.state" reference-fk="state_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_contact_state" type="relfk" layer="0"
+	 src-table="public.address_contact"
+	 dst-table="public.state" reference-fk="state_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_users_state" type="relfk" layer="0"
+	 src-table="public.users"
+	 dst-table="public.state" reference-fk="state_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_profiles_email_contact" type="relfk" layer="0"
+	 src-table="public.profiles"
+	 dst-table="public.email_contact" reference-fk="email_contact_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_recover_password_info_email_contact" type="relfk" layer="0"
+	 src-table="public.recover_password_info"
+	 dst-table="public.email_contact" reference-fk="email_contact_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_invite_email_contact" type="relfk" layer="0"
+	 src-table="public.invite"
+	 dst-table="public.email_contact" reference-fk="email_contact_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_contacts_companies" type="relfk" layer="0"
+	 src-table="public.contacts"
+	 dst-table="public.companies" reference-fk="companies_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_contacts_job_position" type="relfk" layer="0"
+	 src-table="public.contacts"
+	 dst-table="public.job_position" reference-fk="job_position_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_contacts_time_zone" type="relfk" layer="0"
+	 src-table="public.contacts"
+	 dst-table="public.time_zone" reference-fk="time_zone_id"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_contact_languages_connection_contacts" type="relfk" layer="0"
+	 src-table="public.contact_languages_connection"
+	 dst-table="public.contacts" reference-fk="id_contacts_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_contact_languages_connection_language_list" type="relfk" layer="0"
+	 src-table="public.contact_languages_connection"
+	 dst-table="public.language_list" reference-fk="language_list_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_contact_country" type="relfk" layer="0"
+	 src-table="public.address_contact"
+	 dst-table="public.country" reference-fk="country_id_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_address_contact_city" type="relfk" layer="0"
+	 src-table="public.address_contact"
+	 dst-table="public.city" reference-fk="city_id_fk"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
